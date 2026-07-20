@@ -1,0 +1,7 @@
+.env
+.venv\
+advicesaver\__pycache__
+__pychache__
+venv\
+.idea\
+*.pyc
