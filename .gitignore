@@ -5,3 +5,5 @@ __pychache__
 venv\
 .idea\
 *.pyc
+advice.db
+instance\
