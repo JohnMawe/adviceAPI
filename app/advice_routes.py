@@ -13,8 +13,7 @@ def advice_dict_builder(advice_id, advice):
     }
 
 def validate_advice_payload():
-    data = request.get_json()
-
+    data = request.get_json(silent=True)
     if data is None:
         return None, (
             jsonify(response_builder(
@@ -33,7 +32,7 @@ def validate_advice_payload():
             
     if not isinstance(data["advice"], str):
         return None, (jsonify(response_builder(
-            "Advice cannot be integer", 
+            "Advice must be a string", 
             state="Failed")),
             400)
 

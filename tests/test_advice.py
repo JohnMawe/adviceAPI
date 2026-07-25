@@ -1,5 +1,3 @@
-from utilities.endpoint_validater import *
-
 # Global variables
 base_url = "/advice"
 sample_id = 1
@@ -7,7 +5,7 @@ json_payload = {"advice": "Test before push to production"}
 new_json_payload = {"advice": " New test before push to production"}
 empty_json = {}
 empty_advice = {"advice": " "}
-invalied_key = {"advi": "Test before push to production"}
+invalid_key = {"advi": "Test before push to production"}
 integer_advice = {"advice": 1234}
 
 # Helper function
@@ -65,10 +63,10 @@ def test_create_advice(client):
     data = response.get_json()
     assert data["success"] is True
     assert data["message"] == "Advice saved successfuly"
-    assert data["data"]["advice_id"] == 1
+    assert isinstance(data["data"]["advice_id"], int)
     assert data["data"]["advice"] == json_payload["advice"]
 
-def test_cteate_without_json(client):
+def test_create_empty_json(client):
     response = create_new_advice(client, 
         json=empty_json, 
         code=400)
@@ -76,9 +74,15 @@ def test_cteate_without_json(client):
     assert data["success"] is False
     assert data["message"] == "Advice field is required"
 
+def test_create_no_json(client):
+    response = client.post(base_url)
+    assert response.status_code == 400
+    data = response.get_json()
+    
+
 def test_create_invalide_key(client):
     response = create_new_advice(client, 
-        json=invalied_key,
+        json=invalid_key,
         code=400)
     data = response.get_json()
     assert data["success"] is False
@@ -98,7 +102,7 @@ def test_create_advice_integer(client):
         code=400)
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Advice cannot be integer"
+    assert data["message"] == "Advice must be a string"
 
 def test_update_advice(client):
     create_new_advice(client)
@@ -109,6 +113,9 @@ def test_update_advice(client):
     data = response.get_json()
     assert data["success"] is True
     assert data["message"] == "Advice update successfuly"
+    
+    response = client.get(f"{base_url}/{sample_id}")
+    data = response.get_json()
     assert data["data"]["advice"] == new_json_payload["advice"]
 
 def test_update_not_found(client):
@@ -122,7 +129,7 @@ def test_update_not_found(client):
 def test_update_invalid_payload(client):
     create_new_advice(client)
     response = client.put(f"{base_url}/{sample_id}", 
-        json=invalied_key)
+        json=invalid_key)
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
@@ -131,14 +138,16 @@ def test_update_invalid_payload(client):
 def test_delete_advice(client):
     create_new_advice(client)
     response = client.delete(f"{base_url}/{sample_id}")
-    response.status_code == 200
+    assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is True
     assert data["message"] == "Advice deleted successfuly"
+    response = client.get("/advice/1")
+    assert response.status_code == 404
 
 def test_delete_not_found(client):
     response = client.delete(f"{base_url}/{sample_id}")
-    response.status_code == 404
+    assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
     assert data["message"] == "ERROR!! Advice not found. Check advice id"

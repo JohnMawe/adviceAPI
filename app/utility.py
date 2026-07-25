@@ -11,6 +11,3 @@ def response_builder(message, state="failed", data=[]):
             "success": False,
             "message": message
         }
-
-    else:
-        return None

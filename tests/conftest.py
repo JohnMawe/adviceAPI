@@ -15,3 +15,4 @@ def client():
         # cleans-up and rest the database for a fresh start in every test
         db.session.remove()
         db.drop_all()
+        db.engine.dispose()
