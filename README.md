@@ -22,12 +22,12 @@ A simple RESTful API built with Flask, SQLAlchemy, and SQLite for storing and ma
 - SQLAlchemy
 - SQLite
 - Pytest
-- Coverage.py
+- Coverage
 
 ---
 
 # Project Structure
-
+```bash
 adviceAPI/
 │
 ├── app/
@@ -50,23 +50,27 @@ adviceAPI/
 ├── Pipfile
 ├── Pipfile.lock
 └── README.md
+```
 
 ---
 
 # Installation
 
 Clone the repository:
-
+```bash
 git clone <repository-url>
 cd adviceAPI
+```
 
 Install dependencies:
-
+```bash
 pipenv install
+```
 
 Activate the virtual environment:
-
+```bash
 pipenv shell
+```
 
 ---
 
@@ -79,31 +83,32 @@ python run.py
 ```
 
 The API will be available at:
-
+```bash
 http://127.0.0.1:5000
+```
 
 ---
 
 ## API Endpoints
 
-Method| Endpoint| Description
-GET | "/"| API welcome message
+Method | Endpoint | Description
+GET | "/" | API welcome message
 
-GET | "/advice"| Retrieve all advice
+GET | "/advice" | Retrieve all advice
 
-GET | "/advice/<id>"| Retrieve advice by ID
+GET | "/advice/<id>" | Retrieve advice by ID
 
-POST | "/advice"| Create new advice
+POST | "/advice" | Create new advice
 
-PUT | "/advice/<id>"| Update existing advice
+PUT | "/advice/<id>" | Update existing advice
 
-DELETE | "/advice/<id>"| Delete advice
+DELETE | "/advice/<id>" | Delete advice
 
 ---
 
-### Example Request:
+## Example Request:
 
-Create Advice
+### Create Advice
 
 POST "/advice"
 
@@ -112,7 +117,7 @@ POST "/advice"
     "advice": "Always write tests before pushing to production."
 }
 
-### Example success response:
+## Example success response:
 
 {
 
