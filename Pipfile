@@ -11,6 +11,7 @@ flask-sqlalchemy = "*"
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.13"

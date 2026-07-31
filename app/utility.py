@@ -1,4 +1,4 @@
-def response_builder(message, state="failed", data=[]):
+def response_builder(message, state="failed", data=None):
     if state.lower() == "success":
         return {
             "success": True,

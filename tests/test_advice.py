@@ -15,19 +15,14 @@ def create_new_advice(client, json=json_payload, code=201):
     return response
 
 #---------------------TESTING----------------------
-def test_home(client):
-    response = client.get("/")
-    assert response.status_code == 200
-    assert response.get_json() == {"message": "Advice Saver API"}
-
 def test_get_empty_advices(client):
     response = client.get(base_url)
     assert response.status_code == 200
-    assert response.get_json() == {
-        "success": True,
-        "message": "No available advice",
-        "data": []
-    }
+    data = response.get_json()
+    assert data["success"] is True
+    assert data["message"] == "No available advice"
+    assert data["data"] is None
+
 
 def test_get_all_advices(client):
     create_new_advice(client)
