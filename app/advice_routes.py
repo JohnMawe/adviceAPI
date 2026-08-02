@@ -30,21 +30,34 @@ def validate_advice_payload():
             400)
 
     if "advice" not in data or "author_id" not in data:
-        return None, (jsonify(response_builder("'advice' and 'author_id' field is required", state="Failed")), 400)
+        return None, (
+            jsonify(
+                response_builder(
+                    "'advice' and 'author_id' field is required",
+                    state="Failed"
+                )
+            ), 400
+        )
 
     if not isinstance(data["advice"], str):
-        return None, (jsonify(response_builder(
-            "Advice must be a string",
-            state="Failed")),
-            400)
+        return None, (
+            jsonify(
+                response_builder(
+                    "Advice must be a string",
+                    state="Failed"
+                )
+            ), 400
+        )
 
     if not data["advice"].strip():
         return None, (
-            jsonify(response_builder(
-                "Advice cannot be empty",
-                state="Failed"
-            )),
-            400)
+            jsonify(
+                response_builder(
+                    "Advice cannot be empty",
+                    state="Failed"
+                )
+            ), 400
+        )
 
     return data, None
 
@@ -53,9 +66,13 @@ def validate_delete_payload():
     data = request.get_json(silent=True)
     if data is None:
         return None, (
-            jsonify(response_builder(
-                "Request body must be JSON",
-                state="Failed")), 400)
+            jsonify(
+                response_builder(
+                    "Request body must be JSON",
+                    state="Failed"
+                )
+            ), 400
+        )
         
     if "author_id" not in data:
         return None, (
@@ -73,13 +90,28 @@ def validate_delete_payload():
 def validate_advice_exists(advice_id):
     advice = db.session.get(Advice, advice_id)
     if advice is None:
-        return None, (jsonify(response_builder("ERROR!! Advice not found. Check advice id", state="Failed")), 404)
+        return None, (
+            jsonify(
+                response_builder(
+                    "ERROR!! Advice not found. Check advice id",
+                    state="Failed"
+                )
+            ), 404
+        )
+        
     return advice, None
 
 def validate_author_exists(author_id):
     author = db.session.get(Author, author_id)
     if author is None:
-        return None, (jsonify(response_builder("ERROR!! Author not found. Check author id", state="Failed")), 404)
+        return None, (
+            jsonify(
+                response_builder(
+                    "ERROR!! Author not found. Check author id",
+                    state="Failed"
+                )
+            ), 404
+        )
 
     return author, None
 
@@ -90,23 +122,52 @@ def validate_author_exists(author_id):
 def advice_search():
     search = request.args.get("search")
     if not search:
-        return jsonify(response_builder("Search parameter is required!", state="Failed")), 400
+        return jsonify(
+            response_builder(
+                "Search parameter is required!", 
+                state="Failed"
+            )
+        ), 400
+
     page = request.args.get("page", 1, type=int)
-    limit = min(request.args.get("limit", 5, type=int), 15)
-    query = Advice.query.filter(Advice.advice.ilike(f"%{search}%"))
-    
-    advice_list = query.order_by(Advice.creation_date.desc()).paginate(page=page, per_page=limit)
+    limit = min(
+        request.args.get("limit", 5, type=int), 15
+    )
+
+    query = Advice.query.filter(
+        Advice.advice.ilike(f"%{search}%")
+    )
+
+    advice_list = query.order_by(
+        Advice.creation_date.desc()
+    ).paginate(page=page, per_page=limit)
 
 
     if not advice_list.items:
-        return jsonify(response_builder("Search not found", state="Failed")), 404
+        return jsonify(
+            response_builder(
+                "Search not found",
+                state="Failed"
+            )
+        ), 404
 
     advices = [
-        advice_dict_builder(advice.advice_id, advice.advice, advice.author)
+        advice_dict_builder(
+            advice.advice_id,
+            advice.advice,
+            advice.author
+        )
 
         for advice in advice_list.items
     ]
-    return jsonify(response_builder("Search result successful", state="Success", data=advices)), 200
+    
+    return jsonify(
+        response_builder(
+            "Search result successful",
+            state="Success",
+            data=advices
+        )
+    ), 200
 
 
 # Get all advices
@@ -117,22 +178,39 @@ def get_advices():
 
     author_id = request.args.get("author_id", type=int)
     if author_id:
-        query = query.filter(Advice.author_id == author_id)
+        query = query.filter(
+            Advice.author_id == author_id
+        )
 
     date = request.args.get("date")
     if date:
-        query = query.filter(func.date(Advice.creation_date) == date)
+        query = query.filter(
+            func.date(Advice.creation_date) == date
+        )
     
     page = request.args.get("page", 1, type=int)
-    limit = min(request.args.get("limit", 5, type=int), 15)
+    limit = min(
+        request.args.get("limit", 5, type=int), 15
+    )
     
-    advice_list = query.order_by(Advice.creation_date.desc()).paginate(page=page, per_page=limit)
+    advice_list = query.order_by(
+        Advice.creation_date.desc()
+    ).paginate(page=page, per_page=limit)
 
     if not advice_list.items:
-        return jsonify(response_builder("No available advice", state="Success")), 200
+        return jsonify(
+            response_builder(
+                "No available advice",
+                state="Success"
+            )
+        ), 200
 
     advices = [
-        advice_dict_builder(advice.advice_id, advice.advice, advice.author)
+        advice_dict_builder(
+            advice.advice_id,
+            advice.advice,
+            advice.author
+        )
 
         for advice in advice_list.items
     ]
@@ -144,9 +222,13 @@ def get_advices():
         "has_next": advice_list.has_next,
         "has_prev": advice_list.has_prev
     }
-    response = response_builder("All advices", state="Success", data=advices)
-
+    response = response_builder(
+        "All advices",
+        state="Success",
+        data=advices
+    )
     response["pagination"] = pagination
+
     return jsonify(response), 200
 
 
@@ -158,8 +240,19 @@ def advice(advice_id):
     if exist_error:
         return exist_error
 
-    advice_dict = advice_dict_builder(advice.advice_id, advice.advice, advice.author)
-    return jsonify(response_builder("Advice retrieved successfuly", state="Success", data=advice_dict)), 200
+    advice_dict = advice_dict_builder(
+        advice.advice_id,
+        advice.advice,
+        advice.author
+    )
+
+    return jsonify(
+        response_builder(
+            "Advice retrieved successfuly",
+            state="Success",
+            data=advice_dict
+        )
+    ), 200
 
 
 # Create new advice
@@ -180,8 +273,19 @@ def create_advice():
     db.session.add(advice)
     db.session.commit()
 
-    advice_dict = advice_dict_builder(advice.advice_id, advice.advice, advice.author)
-    return jsonify(response_builder("Advice saved successfuly", state="Success", data=advice_dict)), 201
+    advice_dict = advice_dict_builder(
+        advice.advice_id,
+        advice.advice,
+        advice.author
+    )
+
+    return jsonify(
+        response_builder(
+            "Advice saved successfuly",
+            state="Success",
+            data=advice_dict
+        )
+    ), 201
 
 
 # Update existing advice
@@ -205,10 +309,21 @@ def update_advice(advice_id):
     advice.advice = data["advice"]
     db.session.commit()
 
-    advice_dict = advice_dict_builder(advice.advice_id, advice.advice, advice.author)
-    return jsonify(response_builder("Advice update successfuly", state="Success", data=advice_dict)), 200
+    advice_dict = advice_dict_builder(
+        advice.advice_id,
+        advice.advice,
+        advice.author
+    )
 
-    
+    return jsonify(
+        response_builder(
+            "Advice update successfuly",
+            state="Success",
+            data=advice_dict
+        )
+    ), 200
+
+
 # Delete existing advice
 
 @advice_bp.route("/advice/<int:advice_id>", methods=["DELETE"])
@@ -228,4 +343,10 @@ def delete_advice(advice_id):
 
     db.session.delete(advice)
     db.session.commit()
-    return jsonify(response_builder("Advice deleted successfuly", state="Success")), 200
+
+    return jsonify(
+        response_builder(
+            "Advice deleted successfuly",
+            state="Success"
+        )
+    ), 200
