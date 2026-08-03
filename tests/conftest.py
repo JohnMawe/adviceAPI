@@ -2,7 +2,8 @@ import pytest
 from app import create_app
 from app.database import db
 from config import TestingConfig
-from app.models import Advice
+from app.models import Advice, Author
+
 @pytest.fixture
 def client():
     app = create_app(TestingConfig)

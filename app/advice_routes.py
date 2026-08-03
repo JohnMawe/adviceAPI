@@ -3,6 +3,7 @@ from app.database import db
 from app.models import Advice, Author
 from app.utility import response_builder
 from sqlalchemy import func
+from datetime import datetime
 
 advice_bp = Blueprint("advice", __name__)
 
@@ -187,12 +188,31 @@ def get_advices():
         query = query.filter(
             func.date(Advice.creation_date) == date
         )
-    
+
+    time = request.args.get("time")
+    if time:
+        query = query.filter(
+            func.time(Advice.creation_date) == time
+        )
+
+    start_time = request.args.get("start")
+    end_time = request.args.get("end")
+
+    if end_time and start_time:
+        start_time = datetime.fromisoformat(start_time)
+        end_time = datetime.fromisoformat(end_time)
+        query = query.filter(
+            Advice.creation_date.between(
+                start_time, end_time
+            )
+        )
+
+
     page = request.args.get("page", 1, type=int)
     limit = min(
         request.args.get("limit", 5, type=int), 15
     )
-    
+
     advice_list = query.order_by(
         Advice.creation_date.desc()
     ).paginate(page=page, per_page=limit)

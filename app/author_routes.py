@@ -3,6 +3,7 @@ from app.database import db
 from app.models import Author, Advice
 from app.utility import response_builder
 from sqlalchemy import func
+from datetime import datetime
 
 author_bp = Blueprint("author", __name__)
 
@@ -169,7 +170,20 @@ def get_authors():
         query = query.filter(
             func.date(Author.date_joined) == date
         )
-    
+
+    time = request.args.get("time")
+    if time:
+        query.filter(
+            func.time(Author.date_joined) == time
+        )
+
+    start_time = request.args.get("start")
+    end_time = request.args.get("end")
+    if start_time and end_time:
+        start_time = datetime.fromisoformat(start_time)
+        end_time = datetime.fromisoformat(end_time)
+        query = query.filter(Author.date_joined.between(start_time, end_time))
+
     page = request.args.get("page", 1, type=int)
     limit = min(
         request.args.get("limit", 5, type=int), 15
@@ -198,8 +212,8 @@ def get_authors():
     pagination = pagination_builder(author_list)
 
     response = response_builder(
-        "All authors", 
-        state="Success", 
+        "All authors",
+        state="Success",
         data=authors
     )
 
