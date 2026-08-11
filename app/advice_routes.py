@@ -34,7 +34,7 @@ def validate_advice_payload():
         return None, (
             jsonify(
                 response_builder(
-                    "'advice' and 'author_id' field is required",
+                    "'advice' and 'author_id' field are required",
                     state="Failed"
                 )
             ), 400
@@ -147,10 +147,10 @@ def advice_search():
     if not advice_list.items:
         return jsonify(
             response_builder(
-                "Search not found",
+                "No matching advice",
                 state="Failed"
             )
-        ), 404
+        ), 200
 
     advices = [
         advice_dict_builder(

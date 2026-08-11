@@ -47,7 +47,7 @@ def validate_author_payload():
         return None, (
             jsonify(
                 response_builder(
-                    "first_name and second_name field are required",
+                    " 'first_name' and 'second_name' field are required",
                     state="Failed"
                 )
             ), 400
@@ -111,7 +111,7 @@ def validate_author_exists(author_id):
     return author, None
 
 
-#-------------------------ROUTES------------------------
+#------------------------ROUTES------------------------
 
 # Search for author
 
