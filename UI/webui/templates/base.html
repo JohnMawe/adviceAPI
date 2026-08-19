@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <title>{% block title %}base{% endblock %}</title>
+
+        <!-- CSS -->
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+        />
+    </head>
+
+    <body>
+        <!-- Header -->
+        <header>
+            <nav>
+                <a href="{{ url_for('webui.home') }}">
+                    Logo</a>
+
+                <ul>
+                    <li>
+                        <a href="{{ url_for('webui.home') }}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('webui.explore') }}">ExploreHub</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('webui.about') }}">About</a>
+                    </li>
+
+                    <li>
+                        <a href="{{ url_for('webui.docs') }}">Docs</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main content -->
+        <main>
+            {% block content %}
+            <h1>Welcome</h1>
+            <p>This is the base html for all pages</p>
+            {% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 My Website. All rights reserved.</p>
+        </footer>
+
+        <!-- JavaScript -->
+        <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        <script>
+            eruda.init();
+        </script>
+    </body>
+</html>
