@@ -4,11 +4,138 @@
 
 {% block title %} home {% endblock %}
 
+{% block links %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/home.css') }}"
+/>
+
+{% endblock %}
+
 <!-- Main block -->
 {% block content %}
 
-<h1>WELCOME</h1>
-<p>This home page</p>
+<section class="heros">
+    <h1>Sync your mood.<br><span class="title-highlight">Find your drive.</span></h1>
+    <h3>The world's first multi-format motivation engine.<br>Tell us how you feel, and get instant inspiration in visuals, words, video, or speech.<h3/>
 
+    <div class="herosBtn">
+        <button class="btn01" type="button">I am procrastinating</button>
+        <button class="btn02" type="button">Feeling alive</button>
+        <button class="btn03" type="button">Ready to workout</button>
+        <button class="btn04" type="button">Losing focus</button>
+    </div>
+    
+</section>
+
+<section class="preview">
+    <div class="preview-heading">
+        <p>Preview</p>
+        <a href="{{ url_for('webui.explore') }}"> more > </a>
+    </div>
+    
+    <div class="advice-imgs">
+        <div class="advice-img">
+            <img scr="" alt="advice 1">
+        </div>
+        <div class="advice-img">
+            <img scr="" alt="advice 2">
+        </div>
+        <div class="advice-img">
+            <img scr="" alt="advice 3">
+        </div>
+        <div class="advice-img">
+            <img scr="" alt="advice 4">
+        </div>
+    </div>
+    
+    <div class="advice-txt">
+        <div class="text-disp">
+            <p><span>"</span>The secret of getting ahead is getting started<span>"</span></p>
+        </div>
+        <div class="more-options">
+            <div class="audio-player"
+                <button class="play-button-btn05" type="button" aria-label="Play"> ▶ </button>
+
+                <!-- Progress bar -->
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                </div>
+
+                <!-- Time -->
+                <div class="audio-time">
+                    <span class="current-time">1:24</span>
+                    <span>/</span>
+                    <span class="duration">3:45</span>
+                </div>
+
+            </div>
+            <div class="download-copy-Btn">
+                <button class="btn06" type="button">Copy</button>
+                <button class="btn07" type="button">Download</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tutorial">
+    <div class="tutorial-title">
+        <h1>How It Works</h1>
+    </div>
+    <div class="tutorial-container">
+        <div class="step 1">
+            <h2>Step 1</h2>
+            <h3>Choose your vibe</h3>
+            <p>Select your current emotional state</p>
+        </div>
+        <div class="step 2">
+            <h2>Step 2</h2>
+            <h3>Pick your media</h3>
+            <p>Stream audio, download wallpaper, loop video or copy text</p>
+        </div>
+        <div class="step 3">
+            <h2>Step 3</h2>
+            <h3>Take action</h3>
+            <p>Take your synchronized drive out into the real world</p>
+        </div>
+    </div>
+</section>
+<section class="dev-tools">
+    <div class="api-container">
+        <h1>Developer & API</h1>
+        <div class="api-section">
+            <div class="json-block">
+                <h2>JSON Response example</h2>
+                <pre class="json-example"><code>
+            {
+                "id": "ms_98432",
+                "mood": "procrastinating",
+                "core_concept": "Action precedes clarity.
+                                 Do not wait for inspiration to move",
+                "resources": {
+                    "text": [
+                        "Stop thinking",
+                        "Start small",
+                        "Momentum builds after you begin"
+                    ]
+                    "image_url": "https://motivesynk.com",
+                    "audio_url": "https//motivesynk.com",
+                    "author": "Unknown",
+                    "tags": ["discipline", "focuse", "action"]
+                }
+            }</code></pre>
+
+            </div>
+            <div class="api-explained">
+                <h2>Power Your Own App with MotiveSynk</h2>
+                <p>Motivate your community, your way. Whether you're a fitness coach, developer, or simply someone who loves inspiring others, discover the right motivation by category, mood, or media</p>
+                <button class="btn08" type="button">Get Free AIP key</button>
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}

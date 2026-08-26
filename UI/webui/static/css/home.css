@@ -1,0 +1,313 @@
+.heros{
+    display: flex;
+    flex-direction: column;
+    background: green;
+    padding: var(--spacing-xx) var(--spacing-xx);
+    align-items: center;
+    justify-content: center;
+}
+
+.heros h1 {
+    font-size: 3rem;
+}
+
+.heros h1, h3 {
+    color: var(--color-text-light);
+}
+
+
+.title-highlight {
+    color: var(--color-highlight);
+}
+
+.herosBtn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg);
+}
+
+.btn01 {
+    background: #c47c00;
+}
+
+.btn02 {
+    background: #1b8500ff;
+}
+
+.btn03{
+    background: #00956eff;
+}
+
+.preview {
+    padding: 0 var(--spacing-xx);
+}
+
+.preview-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    padding: var(--spacing-md);
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+
+.advice-imgs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.advice-img {
+    aspect-ratio: 9 / 19.5;
+
+    background-color: var(--color-primary);
+
+    border: 2px solid var(--color-surface);
+    border-radius: var(--spacing-xl);
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow-md);
+}
+
+.advice-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .phone-showcase {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .phone-showcase {
+        grid-template-columns: 1fr;
+        max-width: 250px;
+    }
+}
+
+
+.advice-txt{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--spacing-md);
+    max-width: 100%;
+    margin: var(--spacing-md) auto;
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-md);
+    width: 100%;
+}
+
+.text-disp {
+    min-width: 0;
+    text-wrap: 1fr;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    padding: var(--spacing-md);
+}
+
+.text-disp p {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.more-options {
+    min-width: 0;
+    padding: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+    .advice-txt {
+        grid-template-columns: 1fr;
+    }
+}
+
+.audio-player {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 700px;
+
+    padding: 1rem;
+
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+}
+
+
+/* Play button */
+
+.play-button-btn05 {
+    flex-shrink: 0;
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: var(--color-primary);
+    color: var(--color-background);
+
+    cursor: pointer;
+}
+
+
+/* Progress area */
+
+.progress-container {
+    flex: 1;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+
+    background-color: var(--color-accent);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+}
+
+
+/* Played portion */
+
+.progress {
+    width: 35%;
+    height: 100%;
+
+    background-color: var(--color-dark);
+}
+
+
+/* Time */
+
+.audio-time {
+    flex-shrink: 0;
+
+    display: flex;
+    gap: 0.25rem;
+
+    color: var(--color-dark);
+
+    font-size: 0.9rem;
+}
+
+.download-copy-Btn {
+    margin-top: var(--spacing-md)
+}
+
+.tutorial {
+    padding: var(--spacing-lg) 0;
+    max-width: 100%;
+}
+
+.tutorial-title {
+    justify-self: center;
+    font-weight: bold;
+}
+
+.tutorial-container {
+    background: var(--color-primary);
+    padding: var(--spacing-lg) 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    width: 100%;
+    max-width: 100%;
+}
+
+.tutorial-container h2 {
+    color: var(--color-highlight);
+}
+
+.tutorial-container p, h3 {
+    color: var(--color-text-light);
+    font-weight: bold;
+}
+
+.step {
+    padding: var(--spacing-md);
+    min-width: 0;
+}
+
+@media (mix-width: 768px) {
+    .tutorial-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dev-tools {
+    padding: 0 var(--spacing-xx);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.api-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.api-section {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: var(--spacing-lg);
+    width: 100%;
+    max-width: 100%;
+}
+
+.json-block {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--color-surface);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-lg)
+}
+
+.json-example {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+.api-explained {
+    min-width: 0;
+    padding: var(--spacing-lg);
+}
+
+.api-explained button{
+    margin-top: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+    .api-section {
+        grid-template-columns: 1fr;
+    }
+}

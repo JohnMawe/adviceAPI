@@ -5,13 +5,14 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>{% block title %}base{% endblock %}</title>
+        <title>{% block title %} base {% endblock %}</title>
 
         <!-- CSS -->
         <link
             rel="stylesheet"
-            href="{{ url_for('static', filename='css/style.css') }}"
+            href="{{ url_for('static', filename='css/main.css') }}"
         />
+        {% block links %} {% endblock %}
     </head>
 
     <body>
@@ -19,7 +20,7 @@
         <header>
             <nav>
                 <a href="{{ url_for('webui.home') }}">
-                    Logo</a>
+                    MotiveSynk</a>
 
                 <ul>
                     <li>
@@ -30,11 +31,11 @@
                     </li>
 
                     <li>
-                        <a href="{{ url_for('webui.about') }}">About</a>
+                        <a href="{{ url_for('webui.about') }}">About me</a>
                     </li>
 
                     <li>
-                        <a href="{{ url_for('webui.docs') }}">Docs</a>
+                        <a href="{{ url_for('webui.docs') }}">Developers & API</a>
                     </li>
                 </ul>
             </nav>
@@ -50,7 +51,28 @@
 
         <!-- Footer -->
         <footer>
-            <p>&copy; 2026 My Website. All rights reserved.</p>
+            <div class="footer-menu">
+                <div class="footer-logo">
+                    <a href="{{ url_for('webui.home') }}">
+                    MotiveSynk</a>
+                    <p>Sync your mood. Find your drive<p/>
+                </div>
+                <div class="quick-links">
+                    <h2>Quick links</h2>
+                    <a href="{{ url_for('webui.home') }}">Home</a>
+                    <a href="{{ url_for('webui.explore') }}">ExploreHub</a>
+                    <a href="{{ url_for('webui.about') }}">About me</a>
+                    <a href="{{ url_for('webui.docs') }}">Developers & API</a>
+                </div>
+                <div class="contacts">
+                    <h2>Contacts</h2>
+                    <p>motiveSynk@gmail.com</p>
+                    <p>github/motivesynk.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 My Website. All rights reserved.</p>
+            </div>
         </footer>
 
         <!-- JavaScript -->
