@@ -222,7 +222,7 @@
 }
 
 .tutorial-title {
-    justify-self: center;
+    text-align: center;
     font-weight: bold;
 }
 
@@ -231,7 +231,6 @@
     padding: var(--spacing-lg) 0;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    justify-items: center;
     width: 100%;
     max-width: 100%;
 }
@@ -240,17 +239,17 @@
     color: var(--color-highlight);
 }
 
-.tutorial-container p, h3 {
+.tutorial-container p, .tutorial-container h3 {
     color: var(--color-text-light);
     font-weight: bold;
 }
 
 .step {
-    padding: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
     min-width: 0;
 }
 
-@media (mix-width: 768px) {
+@media (max-width: 768px) {
     .tutorial-container {
         grid-template-columns: 1fr;
     }

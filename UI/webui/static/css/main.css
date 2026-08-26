@@ -89,7 +89,6 @@ a:hover {
    ========================================================= */
 
 header {
-    /* background-color: var(--color-dark); */
     color: var(--color-text);
     padding: var(--spacing-md) var(--spacing-xl);
 }
@@ -106,6 +105,7 @@ nav {
 nav a {
     color: var(--color-text);
     font-weight: bold;
+    text-decoration: none;
 }
 
 nav ul {
@@ -113,8 +113,89 @@ nav ul {
 
     display: flex;
     gap: var(--spacing-lg);
+    margin: 0;
+    padding: 0;
 }
 
+.hamburger {
+    display: none;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-text);
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: var(--spacing-md);
+    }
+
+    nav {
+        position: relative;
+    }
+
+    .hamburger{
+        display: flex;
+    }
+
+    nav ul {
+        display: none;
+        position: absolute;
+        top: calc(100% + var(--spacing-md));
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: var(--spacing-md);
+        background-color: var(--color-surface);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+        z-index: 100;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav li {
+        width: 100%;
+    }
+
+    nav li a {
+        display: block;
+        width: 100%;
+        padding: var(--spacing-md);
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .hamburger span {
+        transition: 0.2s ease;
+    }
+
+}
 
 /* =========================================================
    MAIN
@@ -124,7 +205,6 @@ main {
     flex: 1;
     mix-width: 1200px;
     margin: 0;
-    /* padding: var(--spacing-xl); */
 }
 
 
@@ -171,7 +251,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--color-dark);
+    /* background-color: var(--color-dark); */
 }
 
 
@@ -227,6 +307,7 @@ footer {
     color: var(--color-text-light);
     padding: var(--spacing-sm) var(--spacing-lg);
     margin-top: var(--spacing-xl);
+    width: 100%;
 }
 .footer-menu {
     display: flex;
@@ -248,14 +329,19 @@ footer {
     padding-right: var(--spacing-md);
 }
 
-/* @media (max-width: 768px;) {
-    .footer-menu {
-        flex-direction: row;
-    }
-} */
+.footer-logo,
+.quick-links,
+.contacts {
+    min-width: 0;
+}
 
 .quick-links a {
     color: var(--color-text-light);
+    text-decoration: none;
+}
+
+quick-links a:hover {
+    color: var(--color-highlight)
 }
 
 .contacts {
@@ -267,3 +353,16 @@ footer {
     margin-top: var(--spacing-sm);
 }
 
+@media (max-width: 768px) {
+    .footer-menu {
+        flex-direction: column;
+    }
+
+    .footer-logo,
+    .quick-links,
+    .contacts {
+        padding: var(--spacing-md);
+    }
+    
+    }
+}

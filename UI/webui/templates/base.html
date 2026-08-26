@@ -15,6 +15,7 @@
         {% block links %} {% endblock %}
     </head>
 
+    
     <body>
         <!-- Header -->
         <header>
@@ -22,7 +23,19 @@
                 <a href="{{ url_for('webui.home') }}">
                     MotiveSynk</a>
 
-                <ul>
+                <button
+                    class="hamburger"
+                    id="hamburger"
+                    type="button"
+                    aria-label="Open navigation menu"
+                    aria-expanded="false"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul id="nav-links">
                     <li>
                         <a href="{{ url_for('webui.home') }}">Home</a>
                     </li>
@@ -55,7 +68,7 @@
                 <div class="footer-logo">
                     <a href="{{ url_for('webui.home') }}">
                     MotiveSynk</a>
-                    <p>Sync your mood. Find your drive<p/>
+                    <p>Sync your mood. Find your drive</p>
                 </div>
                 <div class="quick-links">
                     <h2>Quick links</h2>
@@ -76,6 +89,8 @@
         </footer>
 
         <!-- JavaScript -->
+        <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+
         <script src="{{ url_for('static', filename='js/app.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
         <script>
