@@ -57,7 +57,7 @@
 html, body {
     height: 100%;
     margin: 0;
-    /* font-size: 16px; */
+    font-size: 16px;
 }
 
 body {
@@ -91,6 +91,10 @@ a:hover {
 header {
     color: var(--color-text);
     padding: var(--spacing-md) var(--spacing-xl);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--color-background)
 }
 
 nav {
@@ -251,9 +255,8 @@ button {
 }
 
 button:hover {
-    /* background-color: var(--color-dark); */
+    background-color: var(--color-accent);
 }
-
 
 /* =========================================================
    CARDS
