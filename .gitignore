@@ -8,3 +8,6 @@ venv\
 advice.db
 instance\
 .coverage
+.idea/adviceAPI.iml
+.idea/.gitignore
+.idea/misc.xml

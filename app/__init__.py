@@ -10,7 +10,7 @@ def create_app(config_class=Config):
     db.init_app(app)
     app.register_blueprint(advice_bp)
     app.register_blueprint(author_bp)
-    
+
     # import models so that SQLAlchemy knows about them
     from app import models
     return app

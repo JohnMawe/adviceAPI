@@ -7,10 +7,12 @@ name = "pypi"
 flask = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
+pytest = "*"
 
 [dev-packages]
 pytest-cov = "*"
 python-dotenv = "*"
+dotenv = "*"
 
 [requires]
 python_version = "3.14"

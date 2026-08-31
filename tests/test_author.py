@@ -159,7 +159,7 @@ def test_get_author(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Author retrieved successfuly"
+    assert data["message"] == "Author retrieved successfully"
     assert isinstance(data["data"]["author_id"], int)
     assert data["data"]["second_name"] == second_name
 
@@ -205,7 +205,7 @@ def test_create_new_author(client):
 
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Author saved successfuly"
+    assert data["message"] == "Author saved successfully"
     assert isinstance(data["data"]["author_id"], int)
 
 def test_no_json(client):
@@ -251,7 +251,7 @@ def test_update_author(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Author updated successfuly"
+    assert data["message"] == "Author updated successfully"
 
 @pytest.mark.parametrize(
     "payload",
@@ -304,7 +304,7 @@ def test_delete_author(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Author deleted successfuly"
+    assert data["message"] == "Author deleted successfully"
 
     response = client.get(f"{author_url}/{author_id}")
     assert response.status_code == 404

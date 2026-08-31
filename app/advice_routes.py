@@ -4,11 +4,12 @@ from app.models import Advice, Author
 from app.utility import response_builder
 from sqlalchemy import func
 from datetime import datetime
+from app.schemas.advice_schemas import AdviceValidator, AdviceResponse, AdviceDelete
+from pydantic import ValidationError
 
 advice_bp = Blueprint("advice", __name__)
 
 # Helper functions
-
 def advice_dict_builder(advice_id, advice, author):
     return {
         "advice_id": advice_id,
@@ -19,74 +20,16 @@ def advice_dict_builder(advice_id, advice, author):
         } if author else {}
     }
 
-
 def validate_advice_payload():
-    data = request.get_json(silent=True)
-    if data is None:
-        return None, (
-            jsonify(response_builder(
-                "Request body must be JSON",
-                state="Failed"
-            )),
-            400)
-
-    if "advice" not in data or "author_id" not in data:
+    try:
+        data = AdviceValidator.model_validate(request.get_json(silent=True))
+        return data, None
+    except ValidationError as error:
         return None, (
             jsonify(
-                response_builder(
-                    "'advice' and 'author_id' field are required",
-                    state="Failed"
-                )
+                response_builder(error.errors(include_context=False), state="Failed")
             ), 400
         )
-
-    if not isinstance(data["advice"], str):
-        return None, (
-            jsonify(
-                response_builder(
-                    "Advice must be a string",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    if not data["advice"].strip():
-        return None, (
-            jsonify(
-                response_builder(
-                    "Advice cannot be empty",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    return data, None
-
-
-def validate_delete_payload():
-    data = request.get_json(silent=True)
-    if data is None:
-        return None, (
-            jsonify(
-                response_builder(
-                    "Request body must be JSON",
-                    state="Failed"
-                )
-            ), 400
-        )
-        
-    if "author_id" not in data:
-        return None, (
-            jsonify(
-                response_builder(
-                    " 'author_id' field is required",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    return data, None
-
 
 def validate_advice_exists(advice_id):
     advice = db.session.get(Advice, advice_id)
@@ -113,10 +56,9 @@ def validate_author_exists(author_id):
                 )
             ), 404
         )
-
     return author, None
 
-# ---------------------ROUTES------------------------
+# =================== ROUTES  ========================
 # Search for advice
 
 @advice_bp.route("/advice/search", methods=["GET"])
@@ -207,7 +149,6 @@ def get_advices():
             )
         )
 
-
     page = request.args.get("page", 1, type=int)
     limit = min(
         request.args.get("limit", 5, type=int), 15
@@ -260,20 +201,20 @@ def advice(advice_id):
     if exist_error:
         return exist_error
 
-    advice_dict = advice_dict_builder(
-        advice.advice_id,
-        advice.advice,
-        advice.author
-    )
-
-    return jsonify(
-        response_builder(
-            "Advice retrieved successfuly",
-            state="Success",
-            data=advice_dict
+    try:
+        valid_advice = AdviceResponse.model_validate(advice)
+        advice_dict = advice_dict_builder(
+            valid_advice.advice_id, valid_advice.advice, advice.author
         )
-    ), 200
-
+        return jsonify(
+            response_builder(
+                "Advice retrieved successfully",
+                state="Success",
+                data=advice_dict
+            )
+        ), 200
+    except ValidationError as error:
+        return jsonify(response_builder(error.errors(), state="Failed")), 400
 
 # Create new advice
 
@@ -283,13 +224,11 @@ def create_advice():
     if error:
         return error
 
-    # This restrictics unknown author from creating advices
-    author, exist_error = validate_author_exists(data["author_id"])
+    author, exist_error = validate_author_exists(data.author_id)
     if exist_error:
         return exist_error
 
-
-    advice = Advice(advice=data["advice"], author=author)
+    advice = Advice(advice=data.advice, author=author)
     db.session.add(advice)
     db.session.commit()
 
@@ -301,12 +240,11 @@ def create_advice():
 
     return jsonify(
         response_builder(
-            "Advice saved successfuly",
+            "Advice saved successfully",
             state="Success",
             data=advice_dict
         )
     ), 201
-
 
 # Update existing advice
 
@@ -320,29 +258,25 @@ def update_advice(advice_id):
     if error:
         return error
 
-    # This restrictics unknown author from updating advices
-    author, exist_error = validate_author_exists(data["author_id"])
+    # These restrictions unknown author from deleting advices
+    author, exist_error = validate_author_exists(data.author_id)
     if exist_error:
         return exist_error
 
-
-    advice.advice = data["advice"]
+    advice.advice = data.advice
     db.session.commit()
-
     advice_dict = advice_dict_builder(
         advice.advice_id,
         advice.advice,
         advice.author
     )
-
     return jsonify(
         response_builder(
-            "Advice update successfuly",
+            "Advice update successfully",
             state="Success",
             data=advice_dict
         )
     ), 200
-
 
 # Delete existing advice
 
@@ -351,22 +285,23 @@ def delete_advice(advice_id):
     advice, exist_error = validate_advice_exists(advice_id)
     if exist_error:
         return exist_error
+    try:
+        payload = AdviceDelete.model_validate(request.get_json(silent=True))
 
-    data, error = validate_delete_payload()
-    if error:
-        return error
+        # These restrictions unknown author from deleting advices
+        author, exist_error = validate_author_exists(payload.author_id)
+        if exist_error:
+            return exist_error
 
-    # This restrictics unknown author from deleting advices
-    author, exist_error = validate_author_exists(data["author_id"])
-    if exist_error:
-        return exist_error
+        db.session.delete(advice)
+        db.session.commit()
 
-    db.session.delete(advice)
-    db.session.commit()
+        return jsonify(
+            response_builder(
+                "Advice deleted successfully",
+                state="Success"
+            )
+        ), 200
 
-    return jsonify(
-        response_builder(
-            "Advice deleted successfuly",
-            state="Success"
-        )
-    ), 200
+    except ValidationError as error:
+        return jsonify(response_builder(error.errors(include_context=False), state="Failed")), 400

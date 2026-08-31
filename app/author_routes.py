@@ -4,10 +4,10 @@ from app.models import Author, Advice
 from app.utility import response_builder
 from sqlalchemy import func
 from datetime import datetime
+from app.schemas.author_schemas import AuthorResponse, AuthorValidator
+from pydantic import ValidationError
 
 author_bp = Blueprint("author", __name__)
-
-
 # Helper functions
 
 def author_dict_builder(author_id, first_name, second_name, advices_count):
@@ -17,7 +17,6 @@ def author_dict_builder(author_id, first_name, second_name, advices_count):
         "second_name": second_name,
         "advice_count": advices_count
     }
-
 def advice_count(author, author_id):
     return db.session.query(Advice.advice_id).filter_by(author_id=author.author_id).count()
 
@@ -32,69 +31,15 @@ def pagination_builder(data_obj):
     }
 
 def validate_author_payload():
-    data = request.get_json(silent=True)
-    if data is None:
+    try:
+        data = AuthorValidator.model_validate(request.get_json(silent=True))
+        return data, None
+    except ValidationError as error:
         return None, (
             jsonify(
-                response_builder(
-                    "Request body must be JSON",
-                    state="Failed"
-                )
+                response_builder(error.errors(include_context=False), state="Failed")
             ), 400
         )
-
-    if "first_name" not in data or "second_name" not in data:
-        return None, (
-            jsonify(
-                response_builder(
-                    " 'first_name' and 'second_name' field are required",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    if not isinstance(data["first_name"], str):
-        return None, (
-            jsonify(
-                response_builder(
-                    "First name must be a string",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    if not isinstance(data["second_name"], str):
-        return None, (
-            jsonify(
-                response_builder(
-                    "Second name must be a string",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    if not data["first_name"].strip():
-        return None, (
-            jsonify(
-                response_builder(
-                    "First name cannot be empty",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    if not data["second_name"].strip():
-        return None, (
-            jsonify(
-                response_builder(
-                    "Second name cannot be empty",
-                    state="Failed"
-                )
-            ), 400
-        )
-
-    return data, None
-
 
 def validate_author_exists(author_id):
     author = db.session.get(Author, author_id)
@@ -107,7 +52,6 @@ def validate_author_exists(author_id):
                 )
             ), 404
         )
-
     return author, None
 
 
@@ -275,7 +219,6 @@ def get_author_advices(author_id):
         )
     )
 
-
 # Get author by id
 
 @author_bp.route("/author/<int:author_id>", methods=["GET"])
@@ -283,22 +226,18 @@ def author(author_id):
     author, exist_error = validate_author_exists(author_id)
     if exist_error:
         return exist_error
-
-    author_dict = author_dict_builder(
-        author.author_id,
-        author.first_name,
-        author.second_name,
-        advice_count(author, author_id)
-    )
-
-    return jsonify(
-        response_builder(
-            "Author retrieved successfuly",
-            state="Success",
-            data=author_dict
-        )
-    ), 200
-
+    try:
+        valid_author = AuthorResponse.model_validate(author)
+        author_dict = valid_author.model_dump()
+        author_dict["advice_count"] = advice_count(author, author_id)
+        return jsonify(response_builder(
+                "Author retrieved successfully",
+                state="Success",
+                data=author_dict
+            )
+        ), 200
+    except ValidationError as error:
+        return jsonify(response_builder(error.errors(), state="Failed")), 404
 
 # Create new author
 
@@ -307,12 +246,10 @@ def create_author():
     data, error = validate_author_payload()
     if error:
         return error
-
     author = Author(
-        first_name=data["first_name"],
-        second_name=data["second_name"]
+        first_name=data.first_name,
+        second_name=data.second_name
     )
-
     db.session.add(author)
     db.session.commit()
 
@@ -325,11 +262,11 @@ def create_author():
 
     return jsonify(
         response_builder(
-            "Author saved successfuly",
+            "Author saved successfully",
             state="Success",
             data=author_dict
         )
-    ), 201
+     ), 201
 
 
 # Update existing author
@@ -356,7 +293,7 @@ def update_author(author_id):
     )
     return jsonify(
         response_builder(
-            "Author updated successfuly",
+            "Author updated successfully",
             state="Success",
             data=author_dict
         )
@@ -370,7 +307,7 @@ def delete_author(author_id):
     if exist_error:
         return exist_error
 
-    # Denay deletion right if author has existing advice
+    # Deny deletion right if author has existing advice
     if advice_count(author, author_id):
         return jsonify(
             response_builder(
@@ -384,7 +321,7 @@ def delete_author(author_id):
 
     return jsonify(
         response_builder(
-            "Author deleted successfuly",
+            "Author deleted successfully",
             state="Success"
         )
     ), 200

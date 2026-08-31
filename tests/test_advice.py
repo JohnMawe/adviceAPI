@@ -67,7 +67,7 @@ def test_search_found(client):
     advice_id_result = data["data"][0]["advice_id"]
     assert advice_id_result == advice_id
 
-def test_seaech_invalid_url(client):
+def test_search_invalid_url(client):
     response = client.get(
         f"{advice_url}/search"
     )
@@ -111,7 +111,7 @@ def test_get_advice_success(client):
     assert data["success"] is True
     assert isinstance(data["data"]["advice_id"], int)
     assert data["data"]["advice"] == json_payload["advice"]
-    assert data["message"] == "Advice retrieved successfuly"
+    assert data["message"] == "Advice retrieved successfully"
 
 
 def test_advice_not_found(client):
@@ -130,7 +130,7 @@ def test_create_advice(client):
     
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Advice saved successfuly"
+    assert data["message"] == "Advice saved successfully"
     assert isinstance(data["data"]["advice_id"], int)
     assert data["data"]["advice"] == json_payload["advice"]
 
@@ -206,7 +206,7 @@ def test_update_advice(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Advice update successfuly"
+    assert data["message"] == "Advice update successfully"
     response = client.get(
         f"{advice_url}/{advice_id}"
     )
@@ -276,7 +276,7 @@ def test_delete_advice(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is True
-    assert data["message"] == "Advice deleted successfuly"
+    assert data["message"] == "Advice deleted successfully"
     response = client.get("/advice/1")
     assert response.status_code == 404
 

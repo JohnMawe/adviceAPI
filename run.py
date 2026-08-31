@@ -4,7 +4,7 @@ from app.database import db
 
 app = create_app()
 
-# set application contex for for SQLAlchemy to know how to create sql tables
+# set application contex for SQLAlchemy to know how to create SQL tables
 with app.app_context():
     db.create_all()
 
