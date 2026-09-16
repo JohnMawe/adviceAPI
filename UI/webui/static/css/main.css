@@ -6,15 +6,18 @@
     /* Color palette */
     --color-background: #E1D4C2;
     --color-surface: #BEB5A9;
-    --color-accent: #A78D78;
+    --color-accent: #a58368ff;
     --color-primary: #6E473B;
-    --color-dark: #291C0E;
+    --color-dark: #362714ff;
+    /* --color-dark: #291C0E; */
     --color-highlight: #ffae24;
+    --color-btn-dark: #6c2c00;
+    --color-btn-light: #c14f00;
 
     /* Text */
-    --color-text: #291C0E;
+    --color-text: #000000;
     --color-text-muted: #6E473B;
-    --color-text-light: #E1D4C2;
+    --color-text-light: #f4efe8;
 
     /* Borders */
     --color-border: #A78D78;
@@ -167,6 +170,7 @@ nav ul {
         border-radius: var(--radius-md);
         box-shadow: var(--shadow-md);
         z-index: 100;
+        opacity: 0.9;
     }
 
     nav ul.active {
@@ -207,7 +211,6 @@ nav ul {
 
 main {
     flex: 1;
-    mix-width: 1200px;
     margin: 0;
 }
 
@@ -231,7 +234,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: var(--color-dark);
+    color: var(--color-text);
     line-height: 1.2;
     margin-bottom: var(--spacing-md);
 }
@@ -242,7 +245,7 @@ h6 {
    ========================================================= */
 
 button {
-    background-color: var(--color-primary);
+    background: linear-gradient(to top, var(--color-btn-dark), var(--color-btn-light));
     color: var(--color-text-light);
 
     border: none;
@@ -365,7 +368,5 @@ quick-links a:hover {
     .quick-links,
     .contacts {
         padding: var(--spacing-md);
-    }
-    
     }
 }
