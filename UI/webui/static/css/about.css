@@ -1,0 +1,112 @@
+.profile-overview, .profile-description {
+    border: none;
+    box-shadow: var(--shadow-md);
+    padding: var(--spacing-xx);
+    margin-left: var(--spacing-lg);
+    margin-right: var(--spacing-lg);
+    border-radius: var(--radius-md);
+}
+
+.profile-overview {
+    background: var(--color-accent);
+}
+
+.profile-description {
+    background: var(--color-surface);
+}
+
+.profile {
+    margin-left: var(--spacing-lg);
+}
+
+.profile-tag {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    margin: var(--spacing-sm);
+    border-radius: 50%;
+    overflow: hidden;
+    max-width: 75px;
+    box-shadow: var(--shadow-md);
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.profile-name h1 {
+    margin: 0;
+    font-size: 4rem;
+}
+
+.profile-name p {
+    font-style: italic;
+}
+
+.profile-links {
+    margin-top: var(--spacing-lg);
+    background: linear-gradient(to right, var(--color-primary));
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.profile-links-container  {
+    display: flex;
+}
+
+.profile-links-container p {
+    padding-right: var(--spacing-lg);
+}
+
+@media (max-width: 768px){
+    .profile {
+        flex-direction: column;
+    }
+}
+
+.profile-description p {
+    margin-bottom: var(--spacing-md);
+}
+
+.profile-description table {
+    margin-bottom: var(--spacing-md);
+    border-collapse: collapse;
+}
+
+td, th{
+    border: var(--spacing-xs) solid var(--color-dark);
+    padding: var(--spacing-md);
+}
+
+th {
+    font-size: 20px;
+}
+
+ul {
+    padding: var(--spacing-md);
+}
+
+.p-list {
+    font-weight: bold;
+}
+
+.disc-img {
+    display: block;
+    float: left;
+    max-width: 50%;
+    box-shadow: var(--shadow-md);
+    height: 200px;
+    margin-right: var(--spacing-md);
+}
+
+.disc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

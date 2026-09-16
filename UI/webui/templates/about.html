@@ -4,10 +4,97 @@
 
 {% block title %} about {% endblock %}
 
+{% block links %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/about.css') }}"
+/>
+
+{% endblock %}
+
 <!-- Main block -->
 {% block content %}
 
-<h1>WELCOME</h1>
-<p>This About page</p>
+<section class="profile-overview">
+    <div class="profile">
+        <div class="profile-tag">
+            <div class="profile-pic">
+                <img src="{{ url_for('static', filename='imgs/img03.jpg')}}" alt="Profile picture">
+            </div>
+
+            <div class="profile-name">
+                <h1>Imbal Lubiy</h1>
+                <p>Software Developer & Designer</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!----------Profile Description------------>
+<section class="profile-description">
+    <div class="disc-img"><img src="{{ url_for('static', filename='imgs/img02.jpg') }}" alt="image"></div>
+    <h1>HI ! Am Johnstone<br>Software developer & Web designer
+    </h1>
+
+    <p>
+        Focused on designing and implementing full-stack web solutions. I specialize in crafting secure, efficient APIs to power backend logic and bridging them semlessly with intuitive, structured user interfaces. Whether structuring data, handling API integration, or crafting modular dynamic front-end componets, my goal is both functional and maintainable.
+    <a href="#contact-me">Contact Me</a>
+    </p>
+
+    <table>
+        <h2>Core Technical Stack</h2>
+        <tbody>
+            <tr>
+                <th>Domain</th>
+                <th>Focus & Capabilities</th>
+            </tr>
+            <tr>
+                <td>Backend & APIs</td>
+                <td>
+                    RESTful API design, database manipulation, authentication flow, structural file handl8ng (JSON / XML), and server-side business logic.
+                </td>
+            </tr>
+            <tr>
+                <td>Frontend Development</td>
+                <td>
+                    Dynamic DOM manipulation, responsive layouts, modular componet design, and user flow excution.
+                </td>
+            </tr>
+            <tr>
+                <td>Tools & Architecture</td>
+                <td>
+                    Version control, terminal scripting, object-oriented design patterns,
+                    and cross-platform web planning.
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>How I Build</h2>
+    <ul>
+        <li>
+            <span class="p-list">API-First Mindset:</span> Systems should be moduler. I start by designing clean API endpoints and data flows before wiring up the user experience.
+        </li>
+        <li>
+            <span class="p-list">Responsive & Stricture UI:</span> Web interfaces need to be clean, scannable, and usable across all screen sizes without bloat.
+        </li>
+        <li>
+            <span class="p-list">Clean Code & Maintanability:</span> I emphasize structured design patters, proper scoping, and readable codebase over quick hacks.
+        </li>
+    </ul>
+
+    <div class="profile-links">
+        <h2 id="contact-me">Contacts</h2>
+        <div class="profile-links-container">
+            <p>github link</p>
+            <p>linkedin</p>
+            <p>mail address</p>
+            <p>Whatapp</p>
+        </div>
+    </div>
+
+</section>
 
 {% endblock %}
