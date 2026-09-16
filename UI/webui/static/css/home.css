@@ -1,8 +1,8 @@
 .heros{
     display: flex;
     flex-direction: column;
-    background: green;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4)), url(../imgs/img01.jpg);
+    background: linear-gradient(to right bottom, var(--color-dark), var(--color-primary), var(--color-accent));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4)), url(../imgs/heros-bg01.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -33,17 +33,18 @@
     padding: var(--spacing-lg);
 }
 
-.btn01 {
-    background: #c47c00;
+.heros-btn01 {
+    background: linear-gradient(to top, #ffb22f, #bc7702);
 }
 
-.btn02 {
-    background: #1b8500ff;
+.heros-btn02 {
+    background: linear-gradient(to top, #29cb00, #1b8500ff);
 }
 
-.btn03{
-    background: #00956eff;
+.heros-btn03{
+    background: linear-gradient(to top, #018f6a, #00c390);
 }
+
 
 .preview {
     padding: 0 var(--spacing-xx);
@@ -62,9 +63,9 @@
 
 .advice-imgs {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--spacing-lg);
-    max-width: 1000px;
+    max-width: 0 auto;
     margin: 0 auto;
 }
 
@@ -100,7 +101,6 @@
         max-width: 250px;
     }
 }
-
 
 .advice-txt{
     display: grid;
@@ -232,7 +232,7 @@
 }
 
 .tutorial-container {
-    background: var(--color-primary);
+    background: linear-gradient(to left, var(--color-primary), var(--color-dark));
     padding: var(--spacing-lg) 0;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
