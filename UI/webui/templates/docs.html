@@ -2,13 +2,1274 @@
 
 <!-- Title block -->
 
-{% block title %} docs {% endblock %}
+{% block title %} docs {% endblock %} {% block links %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/dev_api.css') }}"
+/>
+
+{% endblock %}
 
 <!-- Main block -->
 {% block content %}
 
-<h1>WELCOME</h1>
-<p>This Documentation page</p>
+<section class="docs">
+    <section class="docs-index">
+        <a href="#overview"><h3>Overview</h3></a>
+        <a href="#get-started"><h3>Get Started</h3></a>
+        <a href="#authenti"><h3>Authentication</h3></a>
+        <a href="#base-url"><h3>Base URL</h3></a>
+        <a href="#endpoint"><h3>Endpoint</h3></a>
+        <a href="#requ-respo"><h3>Request & Response</h3></a>
+        <a href="#error"><h3>Error</h3></a>
+        <a href="#rate-limit"><h3>Rate Limit</h3></a>
+        <a href="#example"><h3>Example</h3></a>
+    </section>
 
+<!-----------------docs-description------------------->
+
+    <section class="docs-description">
+        <section class="docs-heading">
+            <h1>API DOCUMENTATION</h1>
+        </section>
+
+<!-----------------Over View------------------->
+        <div class="overview">
+            <h1 id="overview">API Overview</h1>
+            <p>
+                MotiveSynk API is a RESTful API for integrating motivational
+                content into your applications. It provides motivational content
+                in three media types text, audio, and visual and supports
+                filtering by mood. <br />Use the API to deliver personalized
+                motivational content and inspire your users in your own way.
+            </p>
+        </div>
+
+<!-----------------Get Started------------------->
+        <div class="get-started">
+            <h1 id="get-started">Get Started</h1>
+            <p>
+                Welcome to the MotiveSynk API. This guide will help you make
+                your first API request and start integrating motivational
+                content into your application.
+            </p>
+
+            <h2>1. Get your API key</h2>
+            <p>
+                To access the MotiveSynk API, you need an API key.<br />You can
+                request an API key from your <a href="">Developer Dashboard.</a>
+            </p>
+
+            <div class="code-block">
+            <pre><code>
+API key
+msk_live_xxxxxxxxxxxx
+            </code></pre>
+            </div>
+
+            <p>
+                Keep your API key private. Do not expose it in frontend
+                JavaScript, public repositories, or client-side applications.
+            </p>
+
+            <h2>2. Set the API key</h2>
+            <p>
+                Include your API key in the Authorization header of every
+                request.
+            </p>
+
+            <div class="code-block">
+            <pre><code>
+Authorization: Bearer YOUR_API_KEY
+            </code></pre>
+            </div>
+
+            <h4>For example:</h4>
+            <div class="code-block">
+            <pre><code>
+GET /api/v1/motivations
+Authorization: Bearer msk_live_xxxxxxxxx
+            </code></pre>
+            </div>
+
+            <h2>3. Make your first request</h2>
+            <p>Once you have your API key, you can request a motivation:</p>
+
+            <div class=code-block>
+            <pre><code>
+GET /api/v1/motivations
+            </code></pre>
+            </div>
+
+            <h4>Example using curl:</h4>
+            <div class="code-block">
+            <pre><code>
+curl -X GET "https://api.motivesynk.com/api/v1/motivations" \ -H "Authorization: Bearer YOUR_API_KEY"
+            </code></pre>
+            </div>
+
+            <h2>4. Receive a response</h2>
+            <p>A successful request returns JSON:</p>
+            <div class="code-block">
+                <pre><code>
+{
+    "id": "ms_98432",
+    "mood": "procrastinating",
+    "core_concept": "Action precedes clarity. Do not wait for inspiration to move.",
+    "resources": {
+        "text": [
+            "Stop thinking",
+            "Start small",
+            "Momentum builds after you begin"
+        ],
+        "image_url": "https://motivesynk.com/...",
+        "audio_url": "https://motivesynk.com/...",
+        "author": "Unknown",
+        "tags": [
+            "discipline",
+            "focus",
+            "action"
+        ]
+    }
+}
+                </code></pre>
+            </div>
+
+            <h2>5. Start exploring the API</h2>
+            <p>
+                Once your first request works, you can explore the available
+                endpoints to:
+            </p>
+
+            <ul>
+                <li>Retrieve motivations</li>
+                <li>Filter motivations by mood</li>
+                <li>Choose specific media types</li>
+                <li>Retrieve a motivation by ID</li>
+                <li>Build personalized motivational experiences</li>
+            </ul>
+
+<!-----------------Authentication-------------------->
+        <div class="authentication">
+            <h1 id="authenti">Authentication</h1>
+            <p>
+                The MotiveSynk API uses API keys to authenticate requests. An
+                API key identifies your application and allows you to access
+                protected API endpoints. You must include a valid API key with
+                every request that requires authentication.
+            </p>
+
+            <h2>API Key</h2>
+            <p>
+                You can obtain your API key from your MotiveSynk <a>Developer
+                Dashboard.</a> Your API key should be kept private and should never
+                be exposed in client-side code, public repositories, or other
+                publicly accessible locations.
+            </p>
+
+            <h4>Example:</h4>
+            <div class="code-block">
+            <pre><code>
+msk_live_xxxxxxxxxxxxxxxxxxxxxxxxx
+            </code></pre>
+            </div>
+
+            <p>
+                Keep your API key secure. Anyone with access to your API key may
+                be able to make requests on behalf of your application.
+            </p>
+
+            <h2>Authentication Header</h2>
+            <p>
+                Send your API key using the Authorization HTTP header with the
+                Bearer authentication scheme.
+            </p>
+
+            <div class="code-block">
+            <pre><code>
+Authorization: Bearer YOUR_API_KEY
+            </code></pre>
+            </div>
+
+            <h4>For example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /api/v1/motivations Authorization: Bearer msk_live_xxxxxxxxxxxxxxxxx
+                </code></pre>
+            </div>
+
+            <p>
+                The API key should be included in every authenticated request.
+            </p>
+
+            <h4>Example Request</h4>
+            <h4>cURL</h4>
+            <div class="code-block">
+            <pre><code>
+curl -X GET "https://api.motivesynk.com/api/v1/motivations" \ -H "Authorization: Bearer YOUR_API_KEY"
+            </code></pre>
+            </div>
+
+            <h4>Python</h4>
+            <div class="code-block">
+            <pre><code>
+import requests
+
+url = "https://api.motivesynk.com/api/v1/motivations"
+
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY"
+}
+response = requests.get(url, headers=headers)
+print(response.json())
+            </code></pre>
+            </div>
+
+            <h4>JavaScript</h4>
+            <div class="code-block">
+            <pre><code>
+const response = await fetch(
+    "https://api.motivesynk.com/api/v1/motivations",
+    {
+        headers: {
+            "Authorization": "Bearer YOUR_API_KEY"
+        }
+    }
+);
+
+const data = await response.json();
+
+console.log(data);
+            </code></pre>
+            </div>
+
+            <h2>Authentication Errors</h2>
+            <p>
+                If authentication fails, the API returns an appropriate HTTP
+                status code and a JSON error response.
+            </p>
+
+            <h2>Missing API key</h2>
+            <div class="code-block">
+            <pre><code>
+401 Unauthorized
+            </code></pre>
+            </div>
+
+            <div class="code-block">
+            <pre><code>
+{
+    "error": "Authentication required",
+    "message": "API key is missing."
+}
+            </code></pre>
+            </div>
+
+            <h2>Invaild API key</h2>
+            <div class="code-block">
+            <pre><code>
+401 Unauthorized
+            </code></pre>
+            </div>
+
+            <div class="code-block">
+            <pre><code>
+{
+    "error": "Invalid API key",
+    "message": "The provided API key is invalid."
+}
+            </code></pre>
+            </div>
+
+            <h4>Example</h4>
+            <div class="code-block">
+            <pre><code>
+curl -X GET "https://api.motivesynk.com/api/v1/motivations" \ -H "Authorization: Bearer invalid_key"
+            </code></pre>
+            </div>
+
+            <h4>Response:</h4>
+            <div class="code-block">
+            <pre><code>
+HTTP/1.1 401 Unauthorized
+            </code></pre>
+            </div>
+
+            <div class="code-block">
+            <pre><code>
+{
+    "error": "Invalid API key",
+    "message": "The provided API key is invalid."
+}
+            </code></pre>
+            </div>
+
+            <h2>Security Best Practices</h2>
+            <p>
+                Follow these practices when working with your MotiveSynk API
+                key:
+            </p>
+
+            <ul>
+                <li>Never commit your API key to Git.</li>
+                <li>Never put your API key directly in frontend JavaScript.</li>
+                <li>Store your API key in an environment variable.</li>
+                <li>
+                    Don't share your API key through screenshots, messages, or
+                    public documentation.
+                </li>
+                <li>
+                    If you believe your API key has been compromised, revoke it
+                    and generate a new one.
+                </li>
+            </ul>
+
+            <p>For example, instead of:</p>
+
+            <div class="code-block">
+            <pre><code>
+API_KEY = "msk_live_123456789"
+            </code></pre>
+            </div>
+
+            <p>Use an environment variable:</p>
+
+            <div class="code-block">
+            <pre><code>
+import code
+API_KEY = os.getenv("MOTIVESYNK_API_KEY")
+            </code></pre>
+            </div>
+
+            <p>Then:</p>
+
+            <div class="code-block">
+            <pre><code>
+                MOTIVESYNK_API_KEY=msk_live_xxxxxxxxxxxxxxxxx
+            </code></pre>
+            </div>
+
+<!-----------------Base URL-------------------->
+        </div>
+        <div class="base-url">
+            <h1 id="base-url">Base URL</h1>
+            <p>
+                The MotiveSynk API uses a common base URL for all API requests. All API endpoints are built by adding an endpoint path to this base URL.
+            </p>
+
+            <h2>API Base URL</h2>
+            <p>
+                Base URL without endpoint returns the current status and actual version of MotiveSynk API
+            </p>
+
+            <h4>For Example:</h4>
+            <h4>Request URL:</h4>
+            <div class="code-block">
+                <pre><code>
+https://api.motivesynk.com/api/v1
+                </code></pre>
+            </div>
+
+            <h4>Response</h4>
+            <div class="code-block">
+                <pre><code>
+{
+    "version": "1.0.0",
+    "status": "online"
+}
+                </code></pre>
+            </div>
+
+            <h2>URL Structure</h2>
+            <p>
+                The general structure of a MotiveSynk API URL is:
+            </p>
+            <div class="code-block">
+                <pre><code>
+BASE_URL + ENDPOINT
+                </code></pre>
+            </div>
+
+            <h3>
+                For example:
+            </h3>
+            <h4>
+                Base URL:
+            </h4>
+            <div class="code-block">
+                <pre><code>
+https://api.motivesynk.com/api/v1
+                </code></pre>
+            </div>
+
+            <h4>
+                Endpoint:
+            </h4>
+            <div class="code-block">
+                <pre><code>
+/motivations
+                </code></pre>
+            </div>
+
+            <h4>Complete URL:</h4>
+            <div class="code-block">
+                <pre><code>
+https://api.motivesynk.com/api/v1/motivations
+                </code></pre>
+            </div>
+
+            <h2>API Versioning</h2>
+            <p>
+                The MotiveSynk API includes its version in the URL. The current API version is v1.
+            </p>
+
+            <div class="code-block">
+                <pre><code>
+https://api.motivesynk.com/api/v1
+                </code></pre>
+            </div>
+
+            <p>
+                Including the version in the URL allows future versions of the API to introduce changes without unexpectedly breaking applications using an older version.
+            </p>
+
+            <h3>Available Endpoint Examples</h3>
+            <h4>Example of endpoints include:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations
+                </code></pre>
+            </div>
+
+            <p>Retrieves available motivational content.</p>
+
+            <div class="code-block">
+                <pre><code>
+GET /motivations/{id}
+                </code></pre>
+            </div>
+
+            <p>Retrieves a specific motivation using its ID.</p>
+
+            <div class="code-block">
+                <pre><code>
+GET /motivations?mood=focused
+                </code></pre>
+            </div>
+
+            <p>Retrieves motivations filtered by mood.</p>
+            <h3>Complete Request Example</h3>
+            <p>A request to retrieve motivations would use:</p>
+
+            <div class="code-block">
+                <pre><code>
+GET https://api.motivesynk.com/api/v1/motivations
+                </code></pre>
+            </div>
+
+            <p>The API key should be included in the Authorization header as described in the Authentication section.</p>
+        </div>
+
+<!-----------------Endpoint-------------------->
+        <div class="endpoint">
+            <h1 id="endpoint">Endpoint</h1>
+            <p>
+                MotiveSynk API endpoints allow you to access and interact with motivational content. Each endpoint performs a specific operation, such as retrieving motivations, filtering content, or retrieving a specific motivation.
+            </p>
+
+            <h3>All endpoints are relative to the API Base URL:</h3>
+            <div class="code-block">
+                <pre><code>
+https://api.motivesynk.com/api/v1
+                </code></pre>
+            </div>
+
+            <h2>HTTP Methods</h2>
+            <p>
+                The API uses standard HTTP methods to indicate the type of operation being performed.
+            </p>
+            <p>
+                <span class="endpoint-bold">GET </span>
+                - Retrieve information from the API.<br>
+                <span class="endpoint-bold">POST </span>
+                - Create new information or resources.<br>
+                <span class="endpoint-bold">PUT </span>
+                - Update an existing resource.<br>
+                <span class="endpoint-bold">PATCH </span>
+                - Partially update an existing resource.<br>
+                <span class="endpoint-bold">DELETE </span>
+                - Remove a resource.
+            </p>
+
+            <h2>Available Endpoints</h2>
+            <h3>Get Motivations</h3>
+            <h4>GET /motivations</h4>
+            <p>Retrieves a list of available motivational content.</p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations
+                </code></pre>
+            </div>
+
+            <h4>Complete URL:</h4>
+            <div class="code-block">
+                <pre><code>
+https://api.motivesynk.com/api/v1/motivations
+                </code></pre>
+            </div>
+
+            <h3>Get Motivation by ID</h3>
+            <h4>GET /motivations/{id}</h4>
+            <p>Retrieves a specific motivation using its unique ID.</p>
+
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations/ms_98432
+                </code></pre>
+            </div>
+
+            <p>
+                The {id} value should be replaced with the ID of the motivation you want to retrieve.
+            </p>
+
+            <h2>Pagination</h2>
+            <h4>GET /motivations?page={page-number}</h4>
+            <h4>GET /motivations?limit={limit-per-page}</h4>
+            <p>
+                By default, the GET /motivations endpoint returns 15 motivations per page. You can use the page and limit query parameters to control pagination. The page parameter allows you to navigate between pages, while the limit parameter controls the number of motivations returned per page.
+            </p>
+            <h4>For example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations?page=2&limit=25
+                </code></pre>
+            </div>
+
+            <h2>Filters</h2>
+            <h4>Available filters include:</h4>
+            <ul>
+                <li>mood</li>
+                <li>media_type</li>
+            </ul>
+
+            <h3>Filter Motivations by Mood</h3>
+            <h4>GET /motivations?mood={mood}</h4>
+            <p>Retrieves motivations that match a specific mood.</p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations?mood=focused
+                </code></pre>
+            </div>
+
+            <p>You can replace focused with another <a href="#moods">supported mood.</a></p>
+            <h3 id="moods">Suported mood may includes:</h3>
+            <ul>
+                <li>Focused</li>
+                <li>Procrastinating</li>
+                <li>Weak</li>
+                <li>Sad</li>
+                <li>Energetic</li>
+            </ul>
+
+            <h3>Filter by Media Type</h3>
+            <h4>GET /motivations?media_type={type}</h4>
+            <p>Retrieves motivations based on the requested media type.</p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations?media_type=audio
+                </code></pre>
+            </div>
+
+            <h3>Supported media types may include:</h3>
+            <ul>
+                <li>Text</li>
+                <li>Audio</li>
+                <li>Visual</li>
+            </ul>
+
+            <h3>Combine Filters</h3>
+            <p>Multiple query parameters can be used to further refine the results.</p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /motivations?mood=focused&media_type=audio
+                </code></pre>
+            </div>
+
+            <p>This request retrieves audio motivations associated with the focused mood.</p>
+            <h3>Endpoint Parameters</h3>
+            <p>
+                Endpoints can accept different types of parameters.<br>
+                Path parameters are included directly in the URL.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+/motivation/{id}
+                </code></pre>
+            </div>
+
+            <p>
+                Query parameters are added after ? and are used to filter or customize a request.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+/motivations?mood=focused
+                </code></pre>
+            </div>
+
+            <p>Multiple query parameters are separated using &.</p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+/motivations?mood=focused&media_type=audio
+                </code></pre>
+            </div>
+
+            <h2>Authentication</h2>
+            <p>
+                Endpoints that require authentication must include a valid API key in the Authorization header.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+Authorization: Bearer YOUR_API_KEY
+                </code></pre>
+            </div>
+
+            <p>
+                Refer to the <a href="#authenti">Authentication section</a> for more information about obtaining and using an API key.
+            </p>
+
+            <h2>Endpoint Summary</h2>
+            <p>
+                <span class="endpoint-bold">GET /motivations </span>
+                - Retrieve motivations.<br>
+                <span class="endpoint-bold">GET /motivations/{id} </span>
+                - Retrieve a specific motivation.<br>
+                <span class="endpoint-bold">GET /motivations?mood={mood} </span>
+                - Filter motivations by mood.<br>
+                <span class="endpoint-bold">GET /motivations?media_type={type} </span>
+                - Filter motivations by media type.<br>
+                <span class="endpoint-bold">GET /motivations?mood={mood}&media_type={type} </span>
+                - Combine multiple filters.<br>
+                <span class="endpoint-bold">
+                    GET /motivations?page={page-number}&limit={limit-per-page} 
+                </span>
+                - Controls pagination.
+            </p>
+        </div>
+
+<!-----------------Request and Response------------------->
+        <div class="request-response">
+            <h1 id="requ-respo">Request & Response</h1>
+            <p>
+                The MotiveSynk API uses standard HTTP requests and JSON responses. Requests are sent to the appropriate API endpoint, while responses contain the requested motivational content or information about an error.
+            </p>
+
+            <h2>Request Structure</h2>
+            <p>
+                An API request generally consists of:
+            </p>
+            <ul>
+                <li>HTTP method</li>
+                <li>Endpoint URL</li>
+                <li>Headers</li>
+                <li>Query parameters or path parameters, when required</li>
+                <li>Request body, when required</li>
+            </ul>
+
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /api/v1/motivations
+Authorization: Bearer YOUR_API_KEY
+                </code></pre>
+            </div>
+
+            <h2>Request Headers</h2>
+            <p>
+                Authenticated requests must include the API key in the Authorization header.
+            </p>
+            <div class="code-block">
+                <pre><code>
+Authorization: Bearer YOUR_API_KEY
+                </code></pre>
+            </div>
+
+            <p>
+                The API uses JSON for request and response data. When sending JSON data in a request body, specify the content type:
+            </p>
+
+            <div class="code-block">
+                <pre><code>
+Content-Type: application/json
+                </code></pre>
+            </div>
+
+            <h2>Query Parameters</h2>
+            <p>
+                Query parameters can be used to filter or customize the requested data.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /api/v1/motivations?mood="focused"
+                </code></pre>
+            </div>
+
+            <h2>Path Parameters</h2>
+            <p>
+                Some endpoints use parameters directly in the URL.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+GET /api/v1/motivations/{id}
+                </code></pre>
+            </div>
+
+            <p>
+                A request for a specific motivation could look like:
+            </p>
+
+            <div class="code-block">
+                <pre><code>
+GET /api/v1/motivations/ms_98432
+                </code></pre>
+            </div>
+
+            <h2>Request Body</h2>
+            <p>
+                Endpoints that create or update resources can receive data through a JSON request body.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+{
+    "mood": "focused",
+    "media_type": "text"
+}
+                </code></pre>
+            </div>
+
+            <p>
+                The request body should contain valid JSON and follow the requirements defined by the endpoint.
+            </p>
+
+            <h2>Response Structure</h2>
+            <p>
+                A successful API request returns a JSON response containing the requested data.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+{
+    "id": "ms_98432",
+    "mood": "focused",
+    "core_concept": "Action precedes clarity. Do not wait for inspiration to move.",
+    "resources": {
+        "text": [
+            "Stop thinking",
+            "Start small",
+            "Momentum builds after you begin"
+        ],
+        "image_url": "https://motivesynk.com/...",
+        "audio_url": "https://motivesynk.com/...",
+        "author": "Unknown",
+        "tags": [
+            "discipline",
+            "focus",
+            "action"
+        ]
+    }
+}
+                </code></pre>
+            </div>
+
+            <h2>HTTP Status Codes</h2>
+            <p>
+                The API uses standard HTTP status codes to indicate whether a request was successful.
+            </p>
+
+            <h3>200 OK</h3>
+            <p>The request was successful.</p>
+            <h3>201 Created</h3>
+            <p>A new resource was successfully created.</p>
+            <h3>400 Bad Request</h3>
+            <p>
+                The request contains invalid or missing data.
+            </p>
+            <h3>401 Unauthorized</h3>
+            <p>Authentication is required or the provided API key is invalid.</p>
+            <h3>404 Not Found</h3>
+            <p>The requested resource could not be found.</p>
+            <h3>429 Too Many Requests</h3>
+            <p>The client has exceeded the allowed request rate.</p>
+            <h3>500 Internal Server Error</h3>
+            <p>An unexpected error occurred on the server.</p>
+
+            <h3>Error Response</h3>
+            <p>When a request fails, the API returns a JSON response describing the error.</p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+{
+    "error": "Invalid API key",
+    "message": "The provided API key is invalid."
+}
+                </code></pre>
+            </div>
+
+            <p>
+                The error field identifies the type of error, while the message field provides additional information about what went wrong.
+            </p>
+
+            <h2>Example Request and Response</h2>
+            <h3>Request:</h3>
+            <div class="code-block">
+                <pre><code>
+GET /api/v1/motivations?mood=focused
+Authorization: Bearer YOUR_API_KEY
+                </code></pre>
+            </div>
+
+            <h3>Response:</h3>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 200 OK
+Content-Type: application/json
+                </code></pre>
+            </div>
+
+            <div class="code-block">
+                <pre><code>
+{
+    "id": "ms_98432",
+    "mood": "focused",
+    "core_concept": "Action precedes clarity.",
+    "resources": {
+        "text": [
+            "Stop thinking",
+            "Start small",
+            "Begin now"
+        ],
+        "image_url": "https://motivesynk.com/...",
+        "audio_url": "https://motivesynk.com/...",
+        "author": "Unknown",
+        "tags": [
+            "discipline",
+            "focus",
+            "action"
+        ]
+    }
+}
+                </code></pre>
+            </div>
+
+            <h3>Response Format</h3>
+            <p>
+                Unless otherwise specified, the MotiveSynk API returns data in JSON format.<br>
+Clients should use the response HTTP status code to determine whether the request succeeded before processing the response body.
+            </p>
+        </div>
+
+<!----------------------Errors------------------>
+        <div class="error">
+            <h1 id="error">Errors</h1>
+            <p>
+                The MotiveSynk API uses standard HTTP status codes to indicate whether a request was successful or failed. When an error occurs, the API returns a JSON response containing information about the problem.
+            </p>
+
+            <h2>Error Response Structure</h2>
+            <p>
+                A typical error response contains an error field and a message field
+            </p>
+            <div class="code-block">
+                <pre><code>
+{
+    "error": "Invalid API key",
+    "message": "The provided API key is invalid."
+}
+                </code></pre>
+            </div>
+
+            <p>
+                The error field identifies the type of error, while the message field provides additional information about what went wrong.
+            </p>
+
+            <h2>HTTP Error Status Codes</h2>
+            <h3>400 Bad Request</h3>
+            <p>
+                The server could not process the request because the request contains invalid or missing data.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 400 Bad Request
+
+{
+    "error": "Invalid request",
+    "message": "The request contains invalid data."
+}
+                </code></pre>
+            </div>
+
+            <h4>Common causes include:</h4>
+            <ul>
+                <li>Missing required fields</li>
+                <li>Invalid field values</li>
+                <li>Invalid query parameters</li>
+                <li>Malformed JSON</li>
+            </ul>
+
+            <h3>401 Unauthorized</h3>
+            <p>
+                The request requires authentication, but the API key is missing or invalid.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 401 Unauthorized
+
+{
+    "error": "Authentication required",
+    "message": "API key is missing."
+}
+                </code></pre>
+            </div>
+
+            <h4>For an invalid API key</h4>
+            <div class="code-block">
+                <pre><code>
+{
+    "error": "Invalid API key",
+    "message": "The provided API key is invalid."
+}
+                </code></pre>
+            </div>
+
+            <p>
+                Check the <a href="#authenti">Authentication section</a> for information about API keys.
+            </p>
+            <h3>404 Not Found</h3>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 404 Not Found
+
+{
+    "error": "Not found",
+    "message": "The requested motivation was not found."
+}
+                </code></pre>
+            </div>
+
+            <p>
+                This can occur when a requested resource does not exist or an incorrect endpoint is used.
+            </p>
+            <h3>429 Too Many Requests</h3>
+            <p>
+                The client has exceeded the allowed number of API requests within a specific period.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 429 Too Many Requests
+
+{
+    "error": "Rate limit exceeded",
+    "message": "Too many requests. Please try again later."
+}
+                </code></pre>
+            </div>
+
+            <p>
+                See the <a href="#rate-limit">Rate Limit section</a> for more information.
+            </p>
+            <h3>500 Internal Server Error</h3>
+            <p>
+                An unexpected error occurred while processing the request.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 500 Internal Server Error
+
+{
+    "error": "Internal server error",
+    "message": "An unexpected error occurred. Please try again later."
+}
+                </code></pre>
+            </div>
+
+            <p>
+                If you receive this error repeatedly, try again later or <a href="">contact MotiveSynk</a> support.
+            </p>
+
+            <h2>Handling Errors</h2>
+            <p>
+                When making API requests, your application should check the HTTP status code before processing the response.
+            </p>
+            <h4>For example:</h4>
+            <p>
+                200 -> Process the response<br>
+                400 -> Check the request data<br>
+                401 -> Check the API key<br>
+                404 -> Check the requested resource<br>
+                429 -> Wait before sending another request<br>
+                500 -> Try again later
+            </p>
+
+            <h2>Best Practices</h2>
+            <p>When handling MotiveSynk API errors:</p>
+            <ul>
+                <li>Always check the HTTP status code.</li>
+                <li>Read the error and message fields.</li>
+                <li>Do not expose API keys in error logs or client-side applications.</li>
+                <li>Handle errors gracefully in your application.</li>
+                <li>For 429 responses, wait before retrying.</li>
+                <li>For 500 responses, retry later rather than repeatedly sending requests.</li>
+            </ul>
+
+        </div>
+
+<!-----------------Rate Limit-------------------->
+        <div class="rate-limit">
+            <h1 id="rate-limit">Rate Limit</h1>
+            <p>
+                The MotiveSynk API uses rate limits to ensure fair usage and maintain reliable performance for all applications. A rate limit controls how many requests an application can make within a specific period.
+            </p>
+
+            <h2>Rate Limit</h2>
+            <p>
+                Each API key has a maximum number of requests it can make within a defined time window.
+            </p>
+            <h3>For example:</h3>
+            <p>
+                100 request per minute<br>
+                This means an application can make up to 100 requests within one minute using the same API key.<br>
+Once the limit is reached, additional requests will be rejected until the rate-limit window resets.
+            </p>
+
+            <h2>Rate Limit Response</h2>
+            <p>
+                When an application exceeds its allowed request limit, the API returns:
+            </p>
+            <div class="code-block">
+                <pre><code>
+HTTP/1.1 429 Too Many Requests
+                </code></pre>
+            </div>
+
+            <h4>Example response:</h4>
+            <div class="code-block">
+                <pre><code>
+{
+    "error": "Rate limit exceeded",
+    "message": "Too many requests. Please try again later."
+}
+                </code></pre>
+            </div>
+
+            <h2>Rate Limit Headers</h2>
+            <p>
+                The API may include headers that provide information about the current rate limit.
+            </p>
+            <h4>Example:</h4>
+            <div class="code-block">
+                <pre><code>
+X-RateLimit-Limit: 100
+X-RateLimit-Remaining: 25
+X-RateLimit-Reset: 60
+                </code></pre>
+            </div>
+
+            <p>
+                These headers indicate:
+            </p>
+            <ul>
+                <li>X-RateLimit-Limit — Maximum number of requests allowed.</li>
+                <li>X-RateLimit-Remaining — Number of requests remaining.</li>
+                <li>X-RateLimit-Reset — Time remaining before the rate limit resets.</li>
+            </ul>
+
+            <h2>Handling Rate Limits</h2>
+            <p>
+                Applications should detect 429 Too Many Requests responses and avoid immediately sending more requests.<br>
+A recommended approach is to wait and retry after the rate-limit window resets.
+            </p>
+
+            <h2>Best Practices</h2>
+            <p>
+                To avoid unnecessary rate-limit errors:
+            </p>
+            <ul>
+                <li>Avoid sending repeated requests unnecessarily.</li>
+                <li>Cache responses when appropriate.</li>
+                <li>Use the appropriate filters when retrieving data.</li>
+                <li>Monitor the rate-limit headers.</li>
+                <li>Implement retry logic with a delay.</li>
+                <li>Avoid sending requests in tight loops.</li>
+            </ul>
+
+        </div>
+
+<!-----------------Examples-------------------->
+        <div class="examples">
+            <h1 id="example">Examples</h1>
+            <p>
+                The following examples demonstrate how to interact with the MotiveSynk API using common programming languages and tools.
+            </p>
+
+            <h2>cURL</h2>
+            <p>
+                Retrieve a list of motivations:
+            </p>
+            <div class="code-block">
+                <pre><code>
+curl -X GET "https://api.motivesynk.com/api/v1/motivations" \ -H "Authorization: Bearer YOUR_API_KEY"
+                </code></pre>
+            </div>
+
+            <h2>Python</h2>
+            <p>Using Python and the requests library:</p>
+            <div class="code-block">
+                <pre><code>
+import requests
+
+url = "https://api.motivesynk.com/api/v1/motivations"
+
+headers = {
+    "Authorization": "Bearer YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+
+print(response.status_code)
+print(response.json())
+                </code></pre>
+            </div>
+
+            <h2>JavaScript</h2>
+            <p>
+                Using the JavaScript fetch API:
+            </p>
+            <div class="code-block">
+                <pre><code>
+const response = await fetch(
+    "https://api.motivesynk.com/api/v1/motivations",
+    {
+        headers: {
+            "Authorization": "Bearer YOUR_API_KEY"
+        }
+    }
+);
+
+const data = await response.json();
+
+console.log(data);
+                </code></pre>
+            </div>
+
+            <h2>Get a Motivation by ID</h2>
+            <p>
+                To retrieve a specific motivation, include its ID in the endpoint.
+            </p>
+            <div class="code-block">
+                <pre><code>
+curl -X GET \ "https://api.motivesynk.com/api/v1/motivations/ms_98432" \ -H "Authorization: Bearer YOUR_API_KEY"
+                </code></pre>
+            </div>
+
+            <h2>Filter by Mood</h2>
+            <p>
+                To retrieve motivations based on mood, use the mood query parameter.
+            </p>
+            <div class="code-block">
+                <pre><code>
+curl -X GET \ "https://api.motivesynk.com/api/v1/motivations?mood=focused" \ -H "Authorization: Bearer YOUR_API_KEY"
+                </code></pre>
+            </div>
+
+            <h2>Filter by Media Type</h2>
+            <p>
+                You can also filter motivations by media type.
+            </p>
+            <div class="code-block">
+                <pre><code>
+curl -X GET \ "https://api.motivesynk.com/api/v1/motivations?media_type=audio" \ -H "Authorization: Bearer YOUR_API_KEY"
+                </code></pre>
+            </div>
+
+            <h2>Combine Filters</h2>
+            <p>
+                Multiple query parameters can be combined in a single request.
+            </p>
+            <div class="code-block">
+                <pre><code>
+curl -X GET \
+"https://api.motivesynk.com/api/v1/motivations?mood=focused&media_type=audio" \
+-H "Authorization: Bearer YOUR_API_KEY"
+                </code></pre>
+            </div>
+
+            <h2>Successful Response</h2>
+            <p>
+                A successful request returns a JSON response containing the requested motivation.
+            </p>
+            <div class="code-block">
+                <pre><code>
+{
+    "id": "ms_98432",
+    "mood": "focused",
+    "core_concept": "Action precedes clarity.",
+    "resources": {
+        "text": [
+            "Stop thinking",
+            "Start small",
+            "Begin now"
+        ],
+        "image_url": "https://motivesynk.com/...",
+        "audio_url": "https://motivesynk.com/...",
+        "author": "Unknown",
+        "tags": [
+            "discipline",
+            "focus",
+            "action"
+        ]
+    }
+}
+                </code></pre>
+            </div>
+
+            <h2>Error Response</h2>
+            <p>
+                If a request fails, the API returns an appropriate HTTP status code and a JSON error response.
+            </p>
+            <div class="code-block">
+                <pre><code>
+{
+    "error": "Invalid API key",
+    "message": "The provided API key is invalid."
+}
+                </code></pre>
+            </div>
+
+            <h2>Next Steps</h2>
+            <p>
+                After reviewing these examples, you can explore the individual endpoints to learn about their parameters, request requirements, responses, and possible errors.
+            </p>
+            <a href="">GET API KEY</a>
+
+        </div>
+    </section>
+</section>
 
 {% endblock %}
