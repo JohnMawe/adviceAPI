@@ -1,14 +1,559 @@
 {% extends "base.html" %}
 
-<!-- Title block -->
-
 {% block title %} explore {% endblock %}
 
-<!-- Main block -->
+{% block links %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/explore.css') }}"
+/>
+
+{% endblock %}
+
+
 {% block content %}
 
-<h1>WELCOME</h1>
-<p>This ExploreHub page</p>
+<section class="explore">
 
+    <!-- =====================================================
+         EXPLORE SIDEBAR
+         ===================================================== -->
+
+    <aside class="explore-sidebar">
+
+        <button class="sidebar-item active" type="button">
+            <span class="sidebar-icon">↻</span>
+            <span>Refresh</span>
+        </button>
+
+        <button class="sidebar-item" type="button">
+            <span class="sidebar-icon">◉</span>
+            <span>Visual</span>
+        </button>
+
+        <button class="sidebar-item" type="button">
+            <span class="sidebar-icon">T</span>
+            <span>Text</span>
+        </button>
+
+        <button class="sidebar-item" type="button">
+            <span class="sidebar-icon">◫</span>
+            <span>Audio</span>
+        </button>
+
+        <button class="sidebar-item" type="button">
+            <span class="sidebar-icon">♡</span>
+            <span>Favorites</span>
+        </button>
+
+    </aside>
+
+
+    <!-- =====================================================
+         EXPLORE CONTENT
+         ===================================================== -->
+
+    <section class="explore-content">
+
+
+        <!-- =================================================
+             EXPLORE TOP
+             Search, Filter and Motivation Types
+             ================================================= -->
+
+        <section class="explore-top">
+
+            <!-- Search and Filter -->
+
+            <div class="explore-controls">
+
+                <div class="search-box">
+
+                    <span class="search-icon">⌕</span>
+
+                    <input
+                        type="search"
+                        name="mood"
+                        placeholder="Search by mood (e.g. focused, calm, motivated...)"
+                    >
+
+                </div>
+
+
+                <button class="filter-button" type="button">
+
+                    <span>⚱</span>
+                    <span>Filter</span>
+                    <span>⌄</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- Motivation Types -->
+
+            <div class="motivation-types">
+
+                <span class="motivation-label">
+                    Motivation Type:
+                </span>
+
+
+                <button class="type-button active" type="button">
+                    Gym
+                </button>
+
+                <button class="type-button" type="button">
+                    Educational
+                </button>
+
+                <button class="type-button" type="button">
+                    Health
+                </button>
+
+                <button class="type-button" type="button">
+                    Career
+                </button>
+
+                <button class="type-button" type="button">
+                    Personal Growth
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EXPLORE RESULTS
+             Heading and Motivation Grid
+             ================================================= -->
+
+        <section class="explore-results">
+
+
+            <!-- Section Heading -->
+
+            <div class="explore-heading">
+
+                <h1>Explore Motivations</h1>
+
+                <span class="results-count">
+                    12 results
+                </span>
+
+            </div>
+
+
+            <!-- Motivation Grid -->
+
+            <div class="motivation-grid">
+
+
+                <!-- =================================================
+                     MOTIVATION CARD 1
+                     ================================================= -->
+
+                <article class="motivation-card">
+
+                    <div class="motivation-image">
+
+                        <img
+                            src="{{ url_for('static', filename='imgs/advice01.jpg') }}"
+                            alt="Motivation about discipline"
+                        >
+
+                        <span class="motivation-type">
+                            Gym
+                        </span>
+
+                        <button
+                            class="card-menu"
+                            type="button"
+                            aria-label="More options"
+                        >
+                            ...
+                        </button>
+
+                    </div>
+
+
+                    <div class="motivation-content">
+
+                        <h2>
+                            Discipline builds the freedom you want.
+                        </h2>
+
+                        <p>
+                            The harder you work today, the easier your
+                            tomorrow becomes.
+                        </p>
+
+                        <div class="motivation-tags">
+                            <span>discipline</span>
+                            <span>fitness</span>
+                            <span>workout</span>
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button type="button" aria-label="Favorite">
+                                ♡
+                            </button>
+
+                            <button type="button" aria-label="Play audio">
+                                ♫
+                            </button>
+
+                            <button type="button" aria-label="Save">
+                                ♧
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     MOTIVATION CARD 2
+                     ================================================= -->
+
+                <article class="motivation-card">
+
+                    <div class="motivation-image">
+
+                        <img
+                            src="{{ url_for('static', filename='imgs/advice02.jpg') }}"
+                            alt="Motivation about small steps"
+                        >
+
+                        <span class="motivation-type">
+                            Personal Growth
+                        </span>
+
+                        <button
+                            class="card-menu"
+                            type="button"
+                            aria-label="More options"
+                        >
+                            ...
+                        </button>
+
+                    </div>
+
+
+                    <div class="motivation-content">
+
+                        <h2>
+                            Small steps create big results.
+                        </h2>
+
+                        <p>
+                            You don't have to be great to start, but you have
+                            to start to be great.
+                        </p>
+
+                        <div class="motivation-tags">
+                            <span>growth</span>
+                            <span>motivation</span>
+                            <span>mindset</span>
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button type="button" aria-label="Favorite">
+                                ♡
+                            </button>
+
+                            <button type="button" aria-label="View">
+                                ◉
+                            </button>
+
+                            <button type="button" aria-label="Save">
+                                ♧
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     MOTIVATION CARD 3
+                     ================================================= -->
+
+                <article class="motivation-card">
+
+                    <div class="motivation-image">
+
+                        <img
+                            src="{{ url_for('static', filename='imgs/advice03.jpg') }}"
+                            alt="Motivation about progress"
+                        >
+
+                        <span class="motivation-type">
+                            Gym
+                        </span>
+
+                        <button
+                            class="card-menu"
+                            type="button"
+                            aria-label="More options"
+                        >
+                            ...
+                        </button>
+
+                    </div>
+
+
+                    <div class="motivation-content">
+
+                        <h2>
+                            Better than yesterday.
+                        </h2>
+
+                        <p>
+                            Progress isn't about being perfect. It's about
+                            showing up, doing the work, and getting a little
+                            better each day.
+                        </p>
+
+                        <div class="motivation-tags">
+                            <span>fitness</span>
+                            <span>discipline</span>
+                            <span>progress</span>
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button type="button" aria-label="Favorite">
+                                ♡
+                            </button>
+
+                            <button type="button" aria-label="Play audio">
+                                ♫
+                            </button>
+
+                            <button type="button" aria-label="Save">
+                                ♧
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     MOTIVATION CARD 4
+                     ================================================= -->
+
+                <article class="motivation-card">
+
+                    <div class="motivation-image">
+
+                        <img
+                            src="{{ url_for('static', filename='imgs/advice04.jpg') }}"
+                            alt="Motivation about a calm mind"
+                        >
+
+                        <span class="motivation-type">
+                            Health
+                        </span>
+
+                        <button
+                            class="card-menu"
+                            type="button"
+                            aria-label="More options"
+                        >
+                            ...
+                        </button>
+
+                    </div>
+
+
+                    <div class="motivation-content">
+
+                        <h2>
+                            A calm mind is a powerful mind.
+                        </h2>
+
+                        <p>
+                            Take a break. Breathe. You're doing better than
+                            you think.
+                        </p>
+
+                        <div class="motivation-tags">
+                            <span>mental health</span>
+                            <span>calm</span>
+                            <span>balance</span>
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button type="button" aria-label="Favorite">
+                                ♡
+                            </button>
+
+                            <button type="button" aria-label="Play audio">
+                                ♫
+                            </button>
+
+                            <button type="button" aria-label="Save">
+                                ♧
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     MOTIVATION CARD 5
+                     ================================================= -->
+
+                <article class="motivation-card">
+
+                    <div class="motivation-image">
+
+                        <img
+                            src="{{ url_for('static', filename='imgs/advice05.jpg') }}"
+                            alt="Motivation about learning"
+                        >
+
+                        <span class="motivation-type">
+                            Educational
+                        </span>
+
+                        <button
+                            class="card-menu"
+                            type="button"
+                            aria-label="More options"
+                        >
+                            ...
+                        </button>
+
+                    </div>
+
+
+                    <div class="motivation-content">
+
+                        <h2>
+                            Learn today, lead tomorrow.
+                        </h2>
+
+                        <p>
+                            Every lesson you learn today builds the person you
+                            want to be tomorrow.
+                        </p>
+
+                        <div class="motivation-tags">
+                            <span>learning</span>
+                            <span>education</span>
+                            <span>success</span>
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button type="button" aria-label="Favorite">
+                                ♡
+                            </button>
+
+                            <button type="button" aria-label="View">
+                                ◉
+                            </button>
+
+                            <button type="button" aria-label="Save">
+                                ♧
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- =================================================
+                     MOTIVATION CARD 6
+                     ================================================= -->
+
+                <article class="motivation-card">
+
+                    <div class="motivation-image">
+
+                        <img
+                            src="{{ url_for('static', filename='imgs/advice06.jpg') }}"
+                            alt="Motivation about progress"
+                        >
+
+                        <span class="motivation-type">
+                            Health
+                        </span>
+
+                        <button
+                            class="card-menu"
+                            type="button"
+                            aria-label="More options"
+                        >
+                            ...
+                        </button>
+
+                    </div>
+
+
+                    <div class="motivation-content">
+
+                        <h2>
+                            Progress, not perfection.
+                        </h2>
+
+                        <p>
+                            Your journey matters more than your destination.
+                        </p>
+
+                        <div class="motivation-tags">
+                            <span>health</span>
+                            <span>fitness</span>
+                            <span>lifestyle</span>
+                        </div>
+
+                        <div class="card-actions">
+
+                            <button type="button" aria-label="Favorite">
+                                ♡
+                            </button>
+
+                            <button type="button" aria-label="Play audio">
+                                ♫
+                            </button>
+
+                            <button type="button" aria-label="Save">
+                                ♧
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+    </section>
+
+</section>
 
 {% endblock %}

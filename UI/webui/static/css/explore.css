@@ -1,0 +1,740 @@
+/* =========================================================
+   EXPLORE PAGE
+   ========================================================= */
+
+.explore {
+    display: flex;
+
+    width: 100%;
+    height: calc(100vh - 80px);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.explore-sidebar {
+    width: 100px;
+    height: 100%;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: var(--spacing-xl) var(--spacing-sm);
+
+    background-color: var(--color-background);
+
+    border-right: 1px solid var(--color-border);
+}
+
+
+/* Sidebar button */
+
+.sidebar-item {
+    width: 72px;
+    min-height: 72px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--spacing-xs);
+
+    padding: var(--spacing-sm);
+
+    background: transparent;
+    color: var(--color-text);
+
+    border: none;
+    border-radius: var(--radius-lg);
+
+    box-shadow: none;
+
+    font-size: 0.8rem;
+}
+
+
+/* Remove main.css button hover effect */
+
+.sidebar-item:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+
+/* Active sidebar item */
+
+.sidebar-item.active {
+    background: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+
+/* Sidebar icon */
+
+.sidebar-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: var(--color-surface);
+
+    font-size: 1.4rem;
+}
+
+.sidebar-item.active .sidebar-icon {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+
+
+/* =========================================================
+   MAIN EXPLORE CONTENT
+   ========================================================= */
+
+.explore-content {
+    flex: 1;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    padding: 0 var(--spacing-xl);
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   EXPLORE TOP
+   Search, Filter and Motivation Types
+   ========================================================= */
+
+.explore-top {
+    position: sticky;
+    top: 0;
+
+    z-index: 60;
+
+    width: 100%;
+
+    background-color: var(--color-background);
+    padding: var(--spacing-sm) 0;
+}
+
+
+/* =========================================================
+   SEARCH + FILTER
+   ========================================================= */
+
+.explore-controls {
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-md);
+
+    width: 100%;
+
+    margin-bottom: var(--spacing-md);
+}
+
+
+/* Search */
+
+.search-box {
+    flex: 1;
+
+    min-width: 0;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.search-icon {
+    position: absolute;
+
+    left: var(--spacing-md);
+
+    font-size: 1.5rem;
+
+    color: var(--color-text-muted);
+
+    pointer-events: none;
+}
+
+
+.search-box input {
+    width: 100%;
+
+    padding: 0.8rem 1rem 0.8rem 3rem;
+
+    background-color: var(--color-background);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+}
+
+
+/* Filter button */
+
+.filter-button {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: var(--spacing-sm);
+
+    min-width: 130px;
+
+    background: transparent;
+
+    color: var(--color-text);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: none;
+}
+
+
+.filter-button:hover {
+    background-color: var(--color-surface);
+}
+
+
+/* =========================================================
+   MOTIVATION TYPES
+   ========================================================= */
+
+.motivation-types {
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-sm);
+
+    width: 100%;
+
+    padding: var(--spacing-sm);
+
+    margin-bottom: var(--spacing-xl);
+
+    background-color: var(--color-background);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    overflow-x: auto;
+}
+
+
+.motivation-label {
+    flex-shrink: 0;
+
+    font-weight: bold;
+
+    margin-right: var(--spacing-sm);
+}
+
+
+/* Type buttons */
+
+.type-button {
+    flex-shrink: 0;
+
+    padding: 0.6rem 1.2rem;
+
+    background-color: transparent;
+
+    color: var(--color-text);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: none;
+
+    white-space: nowrap;
+}
+
+
+.type-button:hover {
+    background-color: var(--color-surface);
+}
+
+
+/* Active type */
+
+.type-button.active {
+    background: var(--color-primary);
+
+    color: var(--color-text-light);
+
+    border-color: var(--color-primary);
+}
+
+
+/* =========================================================
+   EXPLORE RESULTS
+   ========================================================= */
+
+.explore-results {
+    width: 100%;
+}
+
+
+/* =========================================================
+   EXPLORE HEADING
+   ========================================================= */
+
+.explore-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: var(--spacing-lg);
+}
+
+
+.explore-heading h1 {
+    margin: 0;
+}
+
+
+.results-count {
+    color: var(--color-text-muted);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   MOTIVATION GRID
+   ========================================================= */
+
+.motivation-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        3,
+        minmax(0, 1fr)
+    );
+
+    gap: var(--spacing-lg);
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   MOTIVATION CARD
+   ========================================================= */
+
+.motivation-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    background-color: var(--color-background);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.motivation-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   CARD IMAGE
+   ========================================================= */
+
+.motivation-image {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 12;
+
+    overflow: hidden;
+
+    margin: 0;
+}
+
+
+.motivation-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* Motivation type badge */
+
+.motivation-type {
+    position: absolute;
+
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+
+    padding: 0.3rem 0.7rem;
+
+    background-color: var(--color-background);
+
+    border-radius: var(--radius-lg);
+
+    font-size: 0.8rem;
+
+    font-weight: bold;
+}
+
+
+/* Three-dot menu */
+
+.card-menu {
+    position: absolute;
+
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--color-text-light);
+
+    border: none;
+
+    box-shadow: none;
+
+    font-size: 1.2rem;
+}
+
+
+.card-menu:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.motivation-content {
+    padding: var(--spacing-md);
+
+    margin: 0;
+}
+
+
+.motivation-content h2 {
+    margin-bottom: var(--spacing-sm);
+
+    font-size: 1.05rem;
+}
+
+
+.motivation-content p {
+    margin-bottom: var(--spacing-md);
+
+    color: var(--color-text-muted);
+}
+
+
+/* =========================================================
+   TAGS
+   ========================================================= */
+
+.motivation-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--spacing-xs);
+
+    margin-bottom: var(--spacing-md);
+}
+
+
+.motivation-tags span {
+    padding: 0.25rem 0.65rem;
+
+    background-color: var(--color-surface);
+
+    border-radius: var(--radius-lg);
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+   ========================================================= */
+
+.card-actions {
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-md);
+
+    margin: 0;
+}
+
+
+/* Override global button */
+
+.card-actions button {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--color-text);
+
+    border: none;
+
+    border-radius: 50%;
+
+    box-shadow: none;
+
+    font-size: 1.3rem;
+}
+
+
+/* Push last action to right */
+
+.card-actions button:last-child {
+    margin-left: auto;
+}
+
+
+.card-actions button:hover {
+    background-color: var(--color-surface);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .motivation-grid {
+        grid-template-columns: repeat(
+            2,
+            minmax(0, 1fr)
+        );
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .explore {
+        display: flex;
+
+        flex-direction: column;
+
+        width: 100%;
+        height: calc(100vh - 80px);
+
+        min-height: 0;
+
+        overflow: hidden;
+    }
+
+
+    /* -----------------------------------------
+       Horizontal sidebar
+       ----------------------------------------- */
+
+    .explore-sidebar {
+        width: 100%;
+        height: auto;
+
+        flex-shrink: 0;
+
+        flex-direction: row;
+
+        justify-content: flex-start;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        padding: var(--spacing-sm);
+
+        border-right: none;
+
+        border-bottom: 1px solid var(--color-border);
+
+        gap: var(--spacing-sm);
+    }
+
+
+    .sidebar-item {
+        flex-shrink: 0;
+
+        width: 65px;
+        min-height: 65px;
+    }
+
+
+    .sidebar-icon {
+        width: 35px;
+        height: 35px;
+
+        font-size: 1.1rem;
+    }
+
+
+    /* -----------------------------------------
+       Explore content
+       ----------------------------------------- */
+
+    .explore-content {
+        flex: 1;
+
+        width: 100%;
+        height: auto;
+
+        min-width: 0;
+        min-height: 0;
+
+        padding: 0 var(--spacing-md);
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+
+    /* -----------------------------------------
+       Sticky top section
+       ----------------------------------------- */
+
+    .explore-top {
+        width: 100%;
+    }
+
+
+    /* Search + Filter */
+
+    .explore-controls {
+        align-items: stretch;
+    }
+
+
+    .filter-button {
+        min-width: 90px;
+    }
+
+
+    /* Motivation types */
+
+    .motivation-types {
+        margin-bottom: var(--spacing-lg);
+    }
+
+
+    /* Cards */
+
+    .motivation-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .explore-content {
+        padding: var(--spacing-sm);
+    }
+
+
+    .explore-controls {
+        flex-direction: column;
+    }
+
+
+    .filter-button {
+        width: 100%;
+    }
+
+
+    .explore-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: var(--spacing-xs);
+    }
+
+
+    .motivation-card {
+        width: 100%;
+    }
+
+}
