@@ -1,0 +1,213 @@
+.explore-view {
+    display: none;
+}
+.explore-view.active {
+    display: grid;
+
+    grid-template-columns: repeat(
+        3,
+        minmax(0, 1fr)
+    );
+
+    gap: var(--spacing-lg);
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   MOTIVATION CARD
+   ========================================================= */
+
+.motivation-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    margin: 0;
+
+    background-color: var(--color-background);
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+.motivation-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   CARD IMAGE
+   ========================================================= */
+
+.motivation-image {
+    position: relative;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 12;
+
+    overflow: hidden;
+
+    margin: 0;
+}
+
+
+.motivation-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+}
+
+
+/* Motivation type badge */
+
+.motivation-type {
+    position: absolute;
+
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+
+    padding: 0.3rem 0.7rem;
+
+    background-color: var(--color-background);
+
+    border-radius: var(--radius-lg);
+
+    font-size: 0.8rem;
+
+    font-weight: bold;
+}
+
+
+/* Three-dot menu */
+
+.card-menu {
+    position: absolute;
+
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--color-text-light);
+
+    border: none;
+
+    box-shadow: none;
+
+    font-size: 1.2rem;
+}
+
+
+.card-menu:hover {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.motivation-content {
+    padding: var(--spacing-md);
+
+    margin: 0;
+}
+
+
+.motivation-content h2 {
+    margin-bottom: var(--spacing-sm);
+
+    font-size: 1.05rem;
+}
+
+
+.motivation-content p {
+    margin-bottom: var(--spacing-md);
+
+    color: var(--color-text-muted);
+}
+
+
+/* =========================================================
+   TAGS
+   ========================================================= */
+
+.motivation-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--spacing-xs);
+
+    margin-bottom: var(--spacing-md);
+}
+
+
+.motivation-tags span {
+    padding: 0.25rem 0.65rem;
+
+    background-color: var(--color-surface);
+
+    border-radius: var(--radius-lg);
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+   ========================================================= */
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+
+/* Override global button */
+
+.card-actions button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: transparent;
+    color: var(--color-text);
+    border: none;
+    border-radius: 50%;
+    box-shadow: none;
+    font-size: 1.3rem;
+}
+
+.card-actions button:hover {
+    background-color: var(--color-surface);
+}
