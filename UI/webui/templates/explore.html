@@ -12,6 +12,10 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='css/visual-view.css') }}"
 />
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/text-view.css') }}"
+/>
 
 {% endblock %}
 
@@ -31,22 +35,22 @@
             <span>Refresh</span>
         </button>
 
-        <button class="sidebar-item" type="button">
+        <button class="sidebar-item" type="button" data-view="visual">
             <span class="sidebar-icon">◉</span>
             <span>Visual</span>
         </button>
 
-        <button class="sidebar-item" type="button">
+        <button class="sidebar-item" type="button" data-view="text">
             <span class="sidebar-icon">T</span>
             <span>Text</span>
         </button>
 
-        <button class="sidebar-item" type="button">
+        <button class="sidebar-item" type="button" data-view="audio">
             <span class="sidebar-icon">◫</span>
             <span>Audio</span>
         </button>
 
-        <button class="sidebar-item" type="button">
+        <button class="sidebar-item" type="button" data-view="favorites">
             <span class="sidebar-icon">♡</span>
             <span>Favorites</span>
         </button>
@@ -149,6 +153,7 @@
                 MOTIVATION VIEWS
 ================================================-->
             {%include 'explore-components/visual-view.html'%}
+            {%include 'explore-components/text-view.html'%}
 
         </section>
 

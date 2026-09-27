@@ -1,0 +1,240 @@
+/* =========================================================
+   TEXT MOTIVATION GRID
+   ========================================================= */
+.explore-view {
+    display: none;
+}
+.explore-view active {
+    display: grid;
+
+    grid-template-columns: repeat(
+        3,
+        minmax(0, 1fr)
+    );
+
+    gap: var(--spacing-lg);
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   TEXT MOTIVATION CARD
+   ========================================================= */
+
+.text-motivation-card {
+    position: relative;
+    background-color: var(--color-surface);
+
+    min-width: 0;
+
+    aspect-ratio: 16 / 10;
+
+    overflow: hidden;
+
+    border-radius: var(--radius-lg);
+
+    border: 1px solid var(--color-border);
+
+    box-shadow: var(--shadow-sm);
+
+    isolation: isolate;
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+
+.text-motivation-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   CARD OVERLAY
+   ========================================================= */
+
+.text-card-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+   ========================================================= */
+
+.text-card-content {
+    position: relative;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: var(--spacing-lg);
+}
+
+
+/* =========================================================
+   MOTIVATION BADGE
+   ========================================================= */
+
+.motivation-badge {
+    width: fit-content;
+
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-sm);
+
+    padding: 0.45rem 0.8rem;
+
+    background: rgba(255, 255, 255, 0.65);
+
+    border: 1px solid rgba(110, 71, 59, 0.15);
+
+    border-radius: 999px;
+
+    font-size: 0.8rem;
+
+    backdrop-filter: blur(4px);
+}
+
+
+.motivation-badge span:first-child {
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+
+.quote-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 85%;
+}
+
+
+.quote-mark {
+    display: block;
+
+    height: 20px;
+
+    color: var(--color-primary);
+
+    font-family: Georgia, serif;
+
+    font-size: 3rem;
+
+    line-height: 1;
+}
+
+
+.quote {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.35rem;
+
+    line-height: 1.35;
+
+    color: var(--color-dark);
+}
+
+
+.author {
+    margin-top: var(--spacing-sm);
+
+    color: var(--color-text);
+
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   TAGS
+   ========================================================= */
+
+.motivation-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--spacing-sm);
+
+    margin-bottom: var(--spacing-md);
+}
+
+
+.motivation-tags span {
+    padding: 0.3rem 0.65rem;
+
+    background: rgba(255, 255, 255, 0.45);
+
+    border: 1px solid rgba(110, 71, 59, 0.12);
+
+    border-radius: 999px;
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   CARD ACTIONS
+   ========================================================= */
+
+.card-actions {
+    display: flex;
+    align-items: center;
+
+    gap: var(--spacing-md);
+}
+
+
+.card-actions button {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--color-dark);
+
+    border: none;
+
+    border-radius: 50%;
+
+    box-shadow: none;
+
+    font-size: 1.4rem;
+}
+
+
+.card-actions button:last-child {
+    margin-left: auto;
+}
+
+
+.card-actions button:hover {
+    background-color: rgba(255, 255, 255, 0.45);
+}
