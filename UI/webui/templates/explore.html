@@ -16,6 +16,14 @@
     rel="stylesheet"
     href="{{ url_for('static', filename='css/text-view.css') }}"
 />
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/audio-view.css') }}"
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/favorite-view.css') }}"
+/>
 
 {% endblock %}
 
@@ -154,6 +162,8 @@
 ================================================-->
             {%include 'explore-components/visual-view.html'%}
             {%include 'explore-components/text-view.html'%}
+            {%include 'explore-components/audio-view.html'%}
+            {%include 'explore-components/favorite-view.html'%}
 
         </section>
 
