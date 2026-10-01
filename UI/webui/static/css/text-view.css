@@ -1,9 +1,6 @@
 /* =========================================================
    TEXT MOTIVATION GRID
    ========================================================= */
-.explore-view {
-    display: none;
-}
 .explore-view active {
     display: grid;
 
