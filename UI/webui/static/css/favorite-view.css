@@ -2,6 +2,10 @@
    FAVORITES VIEW
    ========================================================= */
 .explore-view active {
+    display: contents;
+}
+
+.motivation-grid {
     display: grid;
 
     grid-template-columns: repeat(

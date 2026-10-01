@@ -2,6 +2,12 @@
    TEXT MOTIVATION GRID
    ========================================================= */
 .explore-view active {
+    display: contents;
+    width: 100%;
+    height: 100%;
+}
+
+.motivation-grid {
     display: grid;
 
     grid-template-columns: repeat(
@@ -235,3 +241,10 @@
 .card-actions button:hover {
     background-color: rgba(255, 255, 255, 0.45);
 }
+
+/*@media (max-width: 768px) {*/
+/*    .explore-view {*/
+/*        display: grid;*/
+/*        grid-template-columns: 1fr;*/
+/*    }*/
+/*}*/

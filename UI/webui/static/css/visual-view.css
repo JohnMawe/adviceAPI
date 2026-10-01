@@ -1,6 +1,8 @@
+.explore-view active {
+    display: contents;
+}
 
-
-.explore-view.active {
+.motivation-grid {
     display: grid;
 
     grid-template-columns: repeat(
