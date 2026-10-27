@@ -21,7 +21,6 @@ sidebarItems.forEach((item) => {
 
         item.classList.add("active");
 
-
         // Show selected view
 
         exploreViews.forEach((view) => {

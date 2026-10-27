@@ -128,11 +128,8 @@
 .explore-top {
     position: sticky;
     top: 0;
-
     z-index: 60;
-
     width: 100%;
-
     background-color: var(--color-background);
     padding: var(--spacing-sm) 0;
 }
@@ -145,10 +142,9 @@
 .explore-controls {
     display: flex;
     align-items: center;
-
-    gap: var(--spacing-md);
-
     width: 100%;
+    min-width: 0;
+    gap: var(--spacing-md);
 
     margin-bottom: var(--spacing-md);
 }
@@ -160,6 +156,7 @@
     flex: 1;
 
     min-width: 0;
+    width: 100%;
 
     position: relative;
 
@@ -182,17 +179,18 @@
 
 .search-box label {
     width: 100%;
+    display: block;
+    min-width: 0;
 
 }
 
 .search-box input {
-
+    display: block;
     padding: 0.8rem 1rem 0.8rem 3rem;
-
+    width: 100%;
     background-color: var(--color-background);
-
+    min-width: 0;
     border: 1px solid var(--color-border);
-
     border-radius: var(--radius-lg);
 }
 
@@ -315,10 +313,8 @@
     margin: 0;
 }
 
-
 .results-count {
     color: var(--color-text-muted);
-
     font-size: 0.9rem;
 }
 
@@ -328,13 +324,16 @@
 
 @media (max-width: 1000px) {
 
-    .motivation-grid {
-        grid-template-columns: repeat(
-            2,
-            minmax(0, 1fr)
-        );
+    .explore-sidebar {
+        width: 83px;
     }
-
+    .explore-content{
+        padding-right: var(--spacing-md);
+        padding-left: var(--spacing-md);
+    }
+    .explore-heading h1 {
+        font-size: 1.5rem;
+    }
 }
 
 
@@ -346,12 +345,10 @@
 
     .explore {
         display: flex;
-
         flex-direction: column;
 
         width: 100%;
         height: calc(100vh - 80px);
-
         min-height: 0;
 
         overflow: hidden;
@@ -361,50 +358,42 @@
     /* -----------------------------------------
        Horizontal sidebar
        ----------------------------------------- */
-
     .explore-sidebar {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+
         width: 100%;
         height: auto;
-
         flex-shrink: 0;
 
-        flex-direction: row;
-
-        justify-content: flex-start;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
 
         overflow-x: auto;
         overflow-y: hidden;
 
-        padding: var(--spacing-sm);
-
         border-right: none;
-
         border-bottom: 1px solid var(--color-border);
-
-        gap: var(--spacing-sm);
     }
 
-
     .sidebar-item {
-        flex-shrink: 0;
-
+        flex: 0 0 65px;
         width: 65px;
         min-height: 65px;
     }
 
-
     .sidebar-icon {
         width: 35px;
         height: 35px;
-
         font-size: 1.1rem;
     }
 
-
     /* -----------------------------------------
        Explore content
-       ----------------------------------------- */
-
+    ----------------------------------------- */
+    /*Only this section scrolls vertically*/
     .explore-content {
         flex: 1;
 
@@ -424,39 +413,58 @@
     /* -----------------------------------------
        Sticky top section
        ----------------------------------------- */
-
+    /* Keep search and categories together at the top */
     .explore-top {
+        padding: var(--spacing-sm) 0;
+    }
+
+    /* Search + Filter */
+    .explore-controls {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: var(--spacing-sm);
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .search-box {
         width: 100%;
     }
 
-
-    /* Search + Filter */
-
-    .explore-controls {
-        align-items: stretch;
-    }
-
-
     .filter-button {
-        min-width: 90px;
+        width: 100%;
+        min-width: 0;
+        min-height: 42px;
     }
-
 
     /* Motivation types */
-
+    /* Allow  category buttons to scroll horizontally */
     .motivation-types {
-        margin-bottom: var(--spacing-lg);
+        display: flex;
+        width: 100%;
+
+        margin-bottom: var(--spacing-md);
+        gap: var(--spacing-sm);
+
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 
-
-    /* Cards */
-
-    .explore-view {
-        grid-template-columns: 1fr;
+    .type-button {
+        flex-shrink: 0;
     }
 
+    /* Page heading */
+    .explore-heading {
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+
+    .explore-heading h1 {
+        font-size: 1.3rem;
+    }
 }
-
 
 /* =========================================================
    SMALL PHONES
@@ -465,31 +473,16 @@
 @media (max-width: 480px) {
 
     .explore-content {
-        padding: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+        padding-left: var(--spacing-sm);
     }
 
 
-    .explore-controls {
-        flex-direction: column;
+    .explore-heading h1 {
+        font-size: 1.2rem;
     }
 
-
-    .filter-button {
-        width: 100%;
+    .results-count {
+        font-size: 0.8rem;
     }
-
-
-    .explore-heading {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: var(--spacing-xs);
-    }
-
-
-    .motivation-card {
-        width: 100%;
-    }
-
 }

@@ -1,17 +1,14 @@
-.explore-view active {
-    display: contents;
+.explore-view.active {
+    display: block;
 }
 
 .motivation-grid {
     display: grid;
-
     grid-template-columns: repeat(
         3,
         minmax(0, 1fr)
     );
-
     gap: var(--spacing-lg);
-
     width: 100%;
 }
 
@@ -54,13 +51,9 @@
 
 .motivation-image {
     position: relative;
-
     width: 100%;
-
     aspect-ratio: 16 / 12;
-
     overflow: hidden;
-
     margin: 0;
 }
 
@@ -96,7 +89,6 @@
     font-weight: bold;
 }
 
-
 /* Three-dot menu */
 
 .card-menu {
@@ -111,17 +103,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
     padding: 0;
-
     background: transparent;
-
     color: var(--color-text-light);
-
     border: none;
-
     box-shadow: none;
-
     font-size: 1.2rem;
 }
 
@@ -130,21 +116,17 @@
     background: rgba(0, 0, 0, 0.25);
 }
 
-
 /* =========================================================
    CARD CONTENT
    ========================================================= */
 
 .motivation-content {
     padding: var(--spacing-md);
-
     margin: 0;
 }
 
-
 .motivation-content h2 {
     margin-bottom: var(--spacing-sm);
-
     font-size: 1.05rem;
 }
 
@@ -211,4 +193,25 @@
 
 .card-actions button:hover {
     background-color: var(--color-surface);
+}
+
+/* =========================================================
+   TABLET VIEW
+   ========================================================= */
+
+@media (max-width: 1000px) {
+    .motivation-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   MOBILE VIEW
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .motivation-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
 }
