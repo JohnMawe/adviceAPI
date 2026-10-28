@@ -354,7 +354,6 @@
         overflow: hidden;
     }
 
-
     /* -----------------------------------------
        Horizontal sidebar
        ----------------------------------------- */
@@ -485,4 +484,37 @@
     .results-count {
         font-size: 0.8rem;
     }
+}
+
+.motivation-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        4,
+        minmax(0, 1fr)
+    );
+
+    gap: var(--spacing-md);
+    width: 100%;
+}
+
+/* =========================================================
+   TABLET VIEW
+   ========================================================= */
+
+@media (max-width: 1000px) {
+    .motivation-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================================
+   MOBILE VIEW
+   ========================================================= */
+
+@media (max-width: 768px) {
+    .motivation-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
 }

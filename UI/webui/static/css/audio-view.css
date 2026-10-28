@@ -5,19 +5,6 @@
     display: block;
 }
 
-.motivation-grid {
-    display: grid;
-
-    grid-template-columns: repeat(
-        4,
-        minmax(0, 1fr)
-    );
-
-    gap: var(--spacing-md);
-
-    width: 100%;
-}
-
 .audio-card {
     min-width: 0;
 
@@ -309,25 +296,6 @@
     background-color: var(--color-surface);
 }
 
-@media (max-width: 1100px) {
-
-    .explore-view {
-        grid-template-columns: repeat(
-            2,
-            minmax(0, 1fr)
-        );
-    }
-
-}
-
-/*@media (max-width: 768px) {*/
-
-/*    .explore-view {*/
-/*        grid-template-columns: 1fr;*/
-/*    }*/
-
-/*}*/
-
 @media (max-width: 480px) {
 
     .audio-preview {
@@ -342,28 +310,6 @@
 
     .audio-time {
         font-size: 0.65rem;
-    }
-
-}
-
-
-/* =========================================================
-   TABLET VIEW
-   ========================================================= */
-
-@media (max-width: 1000px) {
-    .motivation-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-/* =========================================================
-   MOBILE VIEW
-   ========================================================= */
-
-@media (max-width: 768px) {
-    .motivation-grid {
-        grid-template-columns: minmax(0, 1fr);
     }
 
 }

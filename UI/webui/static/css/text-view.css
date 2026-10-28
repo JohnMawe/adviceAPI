@@ -5,42 +5,22 @@
     display: block;
 }
 
-.motivation-grid {
-    display: grid;
-
-    grid-template-columns: repeat(
-        3,
-        minmax(0, 1fr)
-    );
-
-    gap: var(--spacing-lg);
-
-    width: 100%;
-}
-
-
 /* =========================================================
    TEXT MOTIVATION CARD
    ========================================================= */
 
 .text-motivation-card {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     background-color: var(--color-surface);
 
     min-width: 0;
-
-    aspect-ratio: 16 / 10;
-
     overflow: hidden;
 
     border-radius: var(--radius-lg);
-
     border: 1px solid var(--color-border);
 
     box-shadow: var(--shadow-sm);
-
-    isolation: isolate;
-
     transition:
             transform 0.2s ease,
             box-shadow 0.2s ease;
@@ -53,29 +33,11 @@
     box-shadow: var(--shadow-md);
 }
 
-
-/* =========================================================
-   CARD OVERLAY
-   ========================================================= */
-
-.text-card-overlay {
-    position: absolute;
-
-    inset: 0;
-
-    background: rgba(255, 255, 255, 0.25);
-
-    z-index: -1;
-}
-
-
 /* =========================================================
    CARD CONTENT
    ========================================================= */
 
 .text-card-content {
-    position: relative;
-
     height: 100%;
 
     display: flex;
@@ -121,8 +83,6 @@
    ========================================================= */
 
 .quote-content {
-    flex: 1;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -239,24 +199,3 @@
 .card-actions button:hover {
     background-color: rgba(255, 255, 255, 0.45);
 }
-
-    /* =========================================================
-       TABLET VIEW
-       ========================================================= */
-
-    @media (max-width: 1000px) {
-        .motivation-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
-
-    /* =========================================================
-       MOBILE VIEW
-       ========================================================= */
-
-    @media (max-width: 768px) {
-        .motivation-grid {
-            grid-template-columns: minmax(0, 1fr);
-        }
-
-    }
