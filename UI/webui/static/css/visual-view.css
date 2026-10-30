@@ -7,20 +7,17 @@
    ========================================================= */
 
 .motivation-card {
+    display: flex;
+    flex-direction: column;
+
     min-width: 0;
-
     overflow: hidden;
-
     margin: 0;
 
     background-color: var(--color-background);
-
     border: 1px solid var(--color-border);
-
     border-radius: var(--radius-lg);
-
     box-shadow: var(--shadow-sm);
-
     transition:
             transform 0.2s ease,
             box-shadow 0.2s ease;
@@ -29,7 +26,6 @@
 
 .motivation-card:hover {
     transform: translateY(-3px);
-
     box-shadow: var(--shadow-md);
 }
 
@@ -41,6 +37,7 @@
 .motivation-image {
     position: relative;
     width: 100%;
+    height: 80%;
     aspect-ratio: 16 / 12;
     overflow: hidden;
     margin: 0;
@@ -54,7 +51,6 @@
     height: 100%;
 
     object-fit: cover;
-
     object-position: center;
 }
 
@@ -68,13 +64,10 @@
     left: var(--spacing-sm);
 
     padding: 0.3rem 0.7rem;
-
     background-color: var(--color-background);
-
     border-radius: var(--radius-lg);
 
     font-size: 0.8rem;
-
     font-weight: bold;
 }
 
@@ -110,19 +103,24 @@
    ========================================================= */
 
 .motivation-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     padding: var(--spacing-md);
     margin: 0;
 }
 
-.motivation-content h2 {
+.content {
+    margin-bottom: var(--spacing-md);
+}
+
+.content h2 {
     margin-bottom: var(--spacing-sm);
     font-size: 1.05rem;
 }
 
 
-.motivation-content p {
-    margin-bottom: var(--spacing-md);
-
+.content p {
     color: var(--color-text-muted);
 }
 
@@ -159,7 +157,7 @@
 .card-actions {
     display: flex;
     align-items: center;
-    margin: 0;
+    margin-top: auto;
 }
 
 
