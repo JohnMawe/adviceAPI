@@ -18,23 +18,32 @@
 
 <section class="profile-overview">
     <div class="profile">
-        <div class="profile-tag">
-            <div class="profile-pic">
-                <img src="{{ url_for('static', filename='imgs/img03.jpg')}}" alt="Profile picture">
-            </div>
-
-            <div class="profile-name">
-                <h1>Imbal Lubiy</h1>
-                <p>Software Developer & Designer</p>
-            </div>
+        <div class="profile-pic">
+            <img src="{{ url_for(
+                'static', filename='imgs/profile_img1.png'
+                )}}" alt="Profile picture">
         </div>
+
+        <div class="profile-name">
+            <h1>Imbal Lubiy</h1>
+            <p>Software Developer & Designer</p>
+        </div>
+
     </div>
 
 </section>
 
 <!----------Profile Description------------>
 <section class="profile-description">
-    <div class="disc-img"><img src="{{ url_for('static', filename='imgs/img02.jpg') }}" alt="image"></div>
+    <div class="disc-img">
+        <img src="{{ url_for(
+            'static', filename='imgs/profile_img.png'
+            ) }}" alt="image">
+
+        <span class="profile-status">
+            Available
+        </span>
+    </div>
     <h1>HI ! Am Johnstone<br>Software developer & Web designer
     </h1>
 
