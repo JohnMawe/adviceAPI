@@ -17,14 +17,26 @@
 {% block content %}
 
 <section class="heros">
-    <h1>Sync your mood.<br><span class="title-highlight">Find your drive.</span></h1>
-    <h3>The world's first multi-format motivation engine.<br>Tell us how you feel, and get instant inspiration in visuals, words, video, or speech.<h3/>
+    <h1>
+        Sync your mood.<br><span class="title-highlight">Find your drive.</span>
+    </h1>
+    <h3>
+        The world's first multi-format motivation engine.<br>Tell us how you feel, and get instant inspiration in visuals, words, video, or speech.
+        <h3/>
 
     <div class="herosBtn">
-        <button class="heros-btn01" type="button">I am procrastinating</button>
-        <button class="heros-btn02" type="button">Feeling alive</button>
-        <button class="heros-btn03" type="button">Ready to workout</button>
-        <button class="heros-btn04" type="button">Losing focus</button>
+        <button class="heros-btn01" type="button">
+            I am procrastinating
+        </button>
+        <button class="heros-btn02" type="button">
+            Feeling alive
+        </button>
+        <button class="heros-btn03" type="button">
+            Ready to workout
+        </button>
+        <button class="heros-btn04" type="button">
+            Losing focus
+        </button>
     </div>
 
 </section>
@@ -32,64 +44,230 @@
 <section class="preview">
     <div class="preview-heading">
         <p>Preview</p>
-        <a href="{{ url_for('webui.explore') }}"> more > </a>
+        <a href="{{ url_for('webui.explore') }}">
+            more > 
+        </a>
     </div>
 
-    <div class="advice-imgs">
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice01.jpg')}}" alt="advice 1">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice02.jpg')}}" alt="advice 2">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice03.jpg')}}" alt="advice 3">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice04.jpg')}}" alt="advice 4">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice05.jpg')}}" alt="advice 5">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice06.jpg')}}" alt="advice 6">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice07.jpg')}}" alt="advice 7">
-        </div>
-        <div class="advice-img">
-            <img src="{{ url_for('static', filename='imgs/advice08.jpg')}}" alt="advice 8">
-        </div>
-    </div>
+    <div class="preview-visual">
 
-    <div class="advice-txt">
-        <div class="text-disp">
-            <p><span>"</span>The secret of getting ahead is getting started<span>"</span></p>
-        </div>
-        <div class="more-options">
-            <div class="audio-player"
-                <button class="play-button-btn05" type="button" aria-label="Play"> ▶ </button>
+        <!-- artical card 1--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice01.jpg'
+                )}}" alt="advice 1">
 
-                <!-- Progress bar -->
-                <div class="progress-container">
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                </div>
-
-                <!-- Time -->
-                <div class="audio-time">
-                    <span class="current-time">1:24</span>
-                    <span>/</span>
-                    <span class="duration">3:45</span>
-                </div>
-
+                <span class="advice-type">
+                    Discipline
+                </span>
             </div>
-            <div class="download-copy-Btn">
-                <button class="btn06" type="button">Copy</button>
-                <button class="btn07" type="button">Download</button>
+            <div class="img-content">
+                <h2>
+                    Discipline builds the freedom you want.
+                </h2>
+                <p>
+                    The harder you work today, the easier your tomorrow becomes.
+                </p>
+
+                <div class="img-tags">
+                    <span>discipline</span>
+                    <span>fitness</span>
+                    <span>workout</span>
+                </div>
             </div>
         </div>
+
+        <!-- artical card 2--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice02.jpg'
+                )}}" alt="advice 2">
+
+                <span class="advice-type">
+                    Growth
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    Small steps create big results.
+                </h2>
+                <p>
+                    You don't have to be great to start, but you have to start to be great.
+                </p>
+
+                <div class="img-tags">
+                    <span>growth</span>
+                    <span>motivation</span>
+                    <span>mindset</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- artical card 3--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice03.jpg'
+                )}}" alt="advice 3">
+
+                <span class="advice-type">
+                Fitness
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    Better than yesterday.
+                </h2>
+                <p>
+                    Progress isn't about being perfect. It's about showing up, doing the work, and getting a little better each day.
+                </p>
+
+                <div class="img-tags">
+                    <span>fitness</span>
+                    <span>discipline</span>
+                    <span>Progress</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- artical card 4--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice04.jpg'
+                )}}" alt="advice 4">
+
+                <span class="advice-type">
+                    Health
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    A calm mind is a powerful mind.
+                </h2>
+                <p>
+                    Take a break. Breathe. You're doing better than you think.
+                </p>
+
+                <div class="img-tags">
+                    <span>mental health</span>
+                    <span>calm</span>
+                    <span>balanced</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- artical card 5--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice05.jpg'
+                )}}" alt="advice 5">
+
+                <span class="advice-type">
+                    Growth
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    Learn today, lead tomorrow.
+                </h2>
+                <p>
+                    Every lesson you learn today builds the person you want to be tomorrow.
+                </p>
+
+                <div class="img-tags">
+                    <span>learning</span>
+                    <span>education</span>
+                    <span>success</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- artical card 6--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice06.jpg'
+                )}}" alt="advice 6">
+
+                <span class="advice-type">
+                    Lifestyle
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    Progress, not perfection.
+                </h2>
+                <p>
+                    Your journey matters more than your destination.
+                </p>
+
+                <div class="img-tags">
+                    <span>health</span>
+                    <span>fitness</span>
+                    <span>lifestyle</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- artical card 7--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice07.jpg'
+                )}}" alt="advice 7">
+
+                <span class="advice-type">
+                    Mindset
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    The journey is the reward.
+                </h2>
+                <p>
+                    It's not just about the destination, it's about who you become along the way.
+                </p>
+
+                <div class="img-tags">
+                    <span>career</span>
+                    <span>growth</span>
+                    <span>mindset</span>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- artical card 8--->
+        <div class="visual-artical">
+            <div class="advice-img">
+                <img src="{{ url_for(
+                'static', filename='imgs/advice08.jpg'
+                )}}" alt="advice 8">
+
+                <span class="advice-type">
+                    GYM
+                </span>
+            </div>
+            <div class="img-content">
+                <h2>
+                    Keep the fire burning
+                </h2>
+                <p>
+                   Life can be hard sometimes but you are much stronger
+                </p>
+
+                <div class="img-tags">
+                    <span>strength</span>
+                    <span>disipline</span>
+                    <span>actions</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 

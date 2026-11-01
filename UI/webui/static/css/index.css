@@ -1,11 +1,13 @@
 .heros{
     display: flex;
     flex-direction: column;
+
     background: linear-gradient(to right bottom, var(--color-dark), var(--color-primary), var(--color-accent));
     background-image: linear-gradient(rgba(0, 0, 0, 0.4)), url(../imgs/heros-bg01.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
     padding: var(--spacing-xx);
     align-items: center;
     justify-content: center;
@@ -14,6 +16,7 @@
 
 .heros h1 {
     font-size: 5rem;
+
 }
 
 .heros h1, .heros h3 {
@@ -61,7 +64,7 @@
 }
 
 
-.advice-imgs {
+.preview-visual {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: var(--spacing-lg);
@@ -69,25 +72,102 @@
     margin: 0 auto;
 }
 
-.advice-img {
-    aspect-ratio: 9 / 19.5;
+.visual-artical {
+    display: flex;
+    flex-direction: column;
 
-    background-color: var(--color-primary);
+    overflow: hidden;
+    min-width: 0;
+
+    background-color: var(--color-background);
 
     border: 2px solid var(--color-surface);
-    border-radius: var(--spacing-xl);
+    border-radius: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.visual-artical:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.advice-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 12;
 
     overflow: hidden;
 
-    box-shadow: var(--shadow-md);
 }
 
 .advice-img img {
     width: 100%;
     height: 100%;
+
     display: block;
     object-fit: cover;
+    object-position: center;
 }
+
+.advice-type {
+    position: absolute;
+
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+
+    padding: 0.3rem 0.7rem;
+    background-color: var(--color-background);
+    border-radius: var(--radius-lg);
+
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.img-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    padding: var(--spacing-md);
+}
+
+.img-content h2 {
+    color: var(--color-text-mute);
+
+    font-size: 1.05rem;
+    line-height: 1.4rem;
+}
+
+.img-content p {
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+
+    margin-bottom: var(--spacing-md);
+}
+
+.img-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: var(--spacing-xs);
+
+    margin-bottom: var(--spacing-md);
+}
+
+.img-tags span {
+    padding: 0.25rem 0.65rem;
+
+    background-color: var(--color-surface);
+
+    border-radius: var(--radius-lg);
+
+    font-size: 0.75rem;
+}
+
 
 @media (max-width: 768px) {
     .phone-showcase {
@@ -311,7 +391,16 @@
 }
 
 @media (max-width: 768px) {
+    .heros {
+        min-height: 1200px;
+        
+    }
+
     .api-section {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-visual {
         grid-template-columns: 1fr;
     }
 }
