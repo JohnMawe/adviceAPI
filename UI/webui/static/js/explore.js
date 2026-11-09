@@ -12,7 +12,6 @@ sidebarItems.forEach((item) => {
             return;
         }
 
-
         // Update active sidebar button
 
         sidebarItems.forEach((button) => {
@@ -30,3 +29,11 @@ sidebarItems.forEach((item) => {
     });
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const visualView = document.querySelector("#visual-view");
+    const visualButton = document.querySelector("[data-view='visual']");
+
+    visualView.hidden = false;
+    visualButton.classList.add("active");
+})
