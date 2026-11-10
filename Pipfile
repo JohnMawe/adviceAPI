@@ -8,6 +8,7 @@ flask = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
 pytest = "*"
+pydantic = "*"
 
 [dev-packages]
 pytest-cov = "*"
