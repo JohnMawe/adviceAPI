@@ -25,9 +25,21 @@ def validate_advice_payload():
         data = AdviceValidator.model_validate(request.get_json(silent=True))
         return data, None
     except ValidationError as error:
+        details = [
+            {
+                "fields": err["loc"][0],
+                "message": err["msg"]
+            }
+            for err in error.errors(include_context=False)
+        ]
+
         return None, (
             jsonify(
-                response_builder(error.errors(include_context=False), state="Failed")
+                response_builder(
+                    "The request contains invalid data",
+                    state="Failed",
+                    details=details
+                )
             ), 400
         )
 
@@ -37,7 +49,8 @@ def validate_advice_exists(advice_id):
         return None, (
             jsonify(
                 response_builder(
-                    "ERROR!! Advice not found. Check advice id",
+                    "Advice not found",
+                    details="Advice ID not found",
                     state="Failed"
                 )
             ), 404
@@ -51,7 +64,8 @@ def validate_author_exists(author_id):
         return None, (
             jsonify(
                 response_builder(
-                    "ERROR!! Author not found. Check author id",
+                    "Author not found",
+                    details="Author ID not found.",
                     state="Failed"
                 )
             ), 404

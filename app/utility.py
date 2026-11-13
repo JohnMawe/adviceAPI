@@ -1,4 +1,4 @@
-def response_builder(message, state="failed", data=None):
+def response_builder(message, state="failed", data=None, details=None):
     if state.lower() == "success":
         return {
             "success": True,
@@ -9,6 +9,7 @@ def response_builder(message, state="failed", data=None):
     elif state.lower() == "failed":
         return {
             "success": False,
-            "error": message
+            "error": message,
+            "details": details
         }
     return None

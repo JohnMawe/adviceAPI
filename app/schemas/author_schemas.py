@@ -12,8 +12,9 @@ class AuthorValidator(BaseModel):
 
     @field_validator('first_name', 'second_name')
     @classmethod
-    def validate_author(cls, value):
-        if len(value.strip()) <= 0:
+    def validate_author(cls, value: str):
+        if not value.strip():
             raise ValueError("Advice cannot be empty")
-        return value.strip().lower()
+
+        return value.lower()
 

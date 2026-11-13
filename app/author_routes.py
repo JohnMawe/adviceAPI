@@ -34,12 +34,15 @@ def validate_author_payload():
     try:
         data = AuthorValidator.model_validate(request.get_json(silent=True))
         return data, None
+
     except ValidationError as error:
+        details = [ {"fields": err["loc"][0], "message": err["msg"]} for err in error.errors(include_context=False)]
+
         return None, (
             jsonify(
-                response_builder(error.errors(include_context=False), state="Failed")
+                response_builder("The request contains invalid data", state="Failed", details=details)
             ), 400
-        )
+            )
 
 def validate_author_exists(author_id):
     author = db.session.get(Author, author_id)
@@ -47,7 +50,8 @@ def validate_author_exists(author_id):
         return None, (
             jsonify(
                 response_builder(
-                    "ERROR!! Author not found. Check author id",
+                    "Author not found",
+                    details="Author ID not found.",
                     state="Failed"
                 )
             ), 404
@@ -281,8 +285,8 @@ def update_author(author_id):
     if error:
         return error
 
-    author.first_name = data["first_name"]
-    author.second_name = data["second_name"]
+    author.first_name = data.first_name
+    author.second_name = data.second_name
     db.session.commit()
 
     author_dict = author_dict_builder(

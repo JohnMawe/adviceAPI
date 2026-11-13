@@ -13,17 +13,12 @@ class AdviceValidator(BaseModel):
     @field_validator('advice')
     @classmethod
     def validate_advice(cls, value):
-        if len(value.strip()) <= 0:
+        if not value.strip():
             raise ValueError("Advice cannot be empty")
-        return value.strip().lower()
+
+        return value.lower()
 
 class AdviceDelete(BaseModel):
     author_id: int
 
-    @field_validator('author_id')
-    @classmethod
-    def validate_author_id(cls, value):
-        if len(value.strip()) <= 0:
-            raise ValueError("Author cannot be empty")
-        return value
 
