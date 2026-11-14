@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %} explore {% endblock %}
+
+{% block links %}
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/explore.css') }}"
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/visual-view.css') }}"
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/text-view.css') }}"
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/audio-view.css') }}"
+/>
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/favorite-view.css') }}"
+/>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="explore">
+
+    <!-- =====================================================
+         EXPLORE SIDEBAR
+         ===================================================== -->
+
+    <aside class="explore-sidebar">
+
+        <button class="sidebar-item" type="button" data-action="refresh">
+            <span class="sidebar-icon">↻</span>
+            <span>Refresh</span>
+        </button>
+
+        <button class="sidebar-item" type="button" data-view="visual">
+            <span class="sidebar-icon">◉</span>
+            <span>Visual</span>
+        </button>
+
+        <button class="sidebar-item" type="button" data-view="text">
+            <span class="sidebar-icon">T</span>
+            <span>Text</span>
+        </button>
+
+        <button class="sidebar-item" type="button" data-view="audio">
+            <span class="sidebar-icon">◫</span>
+            <span>Audio</span>
+        </button>
+
+        <button class="sidebar-item" type="button" data-view="favorites">
+            <span class="sidebar-icon">♡</span>
+            <span>Favorites</span>
+        </button>
+
+    </aside>
+
+    <!-- =====================================================
+         EXPLORE CONTENT
+         ===================================================== -->
+
+    <section class="explore-content">
+
+        <!-- =================================================
+             EXPLORE TOP
+             Search, Filter and Motivation Types
+             ================================================= -->
+
+        <section class="explore-top">
+
+            <!-- Search and Filter -->
+
+            <div class="explore-controls">
+
+                <div class="search-box">
+
+                    <span class="search-icon">⌕</span>
+
+                    <label>
+                        <input
+                            type="search"
+                            name="mood"
+                            placeholder="Search by mood (e.g. focused, calm, motivated...)"
+                        >
+                    </label>
+
+                </div>
+
+
+                <button class="filter-button" type="button">
+
+                    <span>⚱</span>
+                    <span>Filter</span>
+                    <span>⌄</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- Motivation Types -->
+
+            <div class="motivation-types">
+                <button class="type-button active" type="button">
+                    Gym
+                </button>
+
+                <button class="type-button" type="button">
+                    Educational
+                </button>
+
+                <button class="type-button" type="button">
+                    Health
+                </button>
+
+                <button class="type-button" type="button">
+                    Career
+                </button>
+
+                <button class="type-button" type="button">
+                    Personal Growth
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EXPLORE RESULTS
+             Heading and Motivation Views
+             ================================================= -->
+
+        <section class="explore-results">
+
+
+            <!-- Section Heading -->
+
+            <div class="explore-heading">
+
+                <h1>Explore Motivations</h1>
+
+                <span class="results-count">
+                    12 results
+                </span>
+
+            </div>
+<!---==============================================
+                MOTIVATION VIEWS
+================================================-->
+            {%include 'explore-components/visual-view.html'%}
+            {%include 'explore-components/text-view.html'%}
+            {%include 'explore-components/audio-view.html'%}
+            {%include 'explore-components/favorite-view.html'%}
+
+        </section>
+
+    </section>
+
+</section>
+
+<script src="{{ url_for('static', filename='js/explore.js') }}"></script>
+
+{% endblock %}
