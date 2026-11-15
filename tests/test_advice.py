@@ -47,7 +47,7 @@ def test_search_no_result(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "No matching advice"
+    assert data["error"] == "No matching advice"
 
 def test_search_found(client):
     author_id = create_new_author(client)
@@ -74,7 +74,7 @@ def test_search_invalid_url(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Search parameter is required!"
+    assert data["error"] == "Search parameter is required!"
 
 def test_get_empty_advices(client):
     response = client.get(advice_url)
@@ -119,11 +119,14 @@ def test_advice_not_found(client):
     assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Advice not found. Check advice id"
+    assert data["error"] == "Advice ID not found"
+
 
 def test_create_advice(client):
     author_id = create_new_author(client)
+
     json_payload["author_id"] = author_id
+
     response = create_new_advice(
         client, json_payload
     )
@@ -141,14 +144,14 @@ def test_empty_json(client):
         code=400)
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "'advice' and 'author_id' field are required"
+    assert data["error"] == "'advice' and 'author_id' field are required"
 
 def test_no_json(client):
     response = client.post(advice_url)
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Request body must be JSON"
+    assert data["error"] == "Request body must be JSON"
 @pytest.mark.parametrize(
     "payload, error_message",
     [
@@ -178,7 +181,7 @@ def test_create_empty_advice(client, payload, error_message):
         code=400)
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == error_message
+    assert data["error"] == error_message
 
 def test_create_author_not_exist(client):
     json_payload["author_id"] = sample_id
@@ -187,7 +190,8 @@ def test_create_author_not_exist(client):
     )
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Author not found. Check author id"
+    assert data["error"] == "Author ID not found"
+    
     
 
 def test_update_advice(client):
@@ -221,7 +225,8 @@ def test_update_not_found(client):
     assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Advice not found. Check advice id"
+    assert data["error"] == "Advice ID not found"
+
 
 def test_update_invalid_payload(client):
     author_id = create_new_author(client)
@@ -238,7 +243,7 @@ def test_update_invalid_payload(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "'advice' and 'author_id' field are required"
+    assert data["error"] == "'advice' and 'author_id' field are required"
 
 def test_update_author_not_exist(client):
     author_id = create_new_author(client)
@@ -257,14 +262,17 @@ def test_update_author_not_exist(client):
 
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Author not found. Check author id"
+    assert data["error"] == "Author ID not found"
+    
 
 def test_delete_advice(client):
     author_id = create_new_author(client)
     json_payload["author_id"] = author_id
+
     delete_payload = {
         "author_id": author_id
     }
+
     new_advice = create_new_advice(
         client, json_payload
     )
@@ -285,7 +293,8 @@ def test_delete_not_found(client):
     assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Advice not found. Check advice id"
+    assert data["error"] == "Advice ID not found"
+    
 
 def test_delete_invalid_key(client):
     author_id = create_new_author(client)
@@ -304,7 +313,7 @@ def test_delete_invalid_key(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == " 'author_id' field is required"
+    assert data["error"] == "'author_id' field is required"
 
 def test_delete_no_payload(client):
     author_id = create_new_author(client)
@@ -320,7 +329,7 @@ def test_delete_no_payload(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Request body must be JSON"
+    assert data["error"] == "Request body must be JSON"
 
 
 def test_delete_author_not_exist(client):
@@ -340,4 +349,5 @@ def test_delete_author_not_exist(client):
 
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Author not found. Check author id"
+    assert data["error"] == "Author ID not found"
+    

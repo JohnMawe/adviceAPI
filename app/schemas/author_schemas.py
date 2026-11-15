@@ -10,11 +10,19 @@ class AuthorValidator(BaseModel):
     first_name: str
     second_name: str
 
-    @field_validator('first_name', 'second_name')
+    @field_validator('first_name')
     @classmethod
     def validate_author(cls, value: str):
         if not value.strip():
-            raise ValueError("Advice cannot be empty")
+            raise ValueError("First name cannot be empty")
 
-        return value.lower()
+        return value
+
+    @field_validator('second_name')
+    @classmethod
+    def validate_author(cls, value: str):
+        if not value.strip():
+            raise ValueError("Second name cannot be empty")
+
+        return value
 

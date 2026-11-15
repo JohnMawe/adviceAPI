@@ -31,18 +31,91 @@ def pagination_builder(data_obj):
     }
 
 def validate_author_payload():
-    try:
-        data = AuthorValidator.model_validate(request.get_json(silent=True))
-        return data, None
-
-    except ValidationError as error:
-        details = [ {"fields": err["loc"][0], "message": err["msg"]} for err in error.errors(include_context=False)]
-
-        return None, (
-            jsonify(
-                response_builder("The request contains invalid data", state="Failed", details=details)
-            ), 400
+    # Check what data am I receiving, is it json? If not error
+        if not request.is_json:
+            return None, (
+                jsonify(
+                    response_builder(
+                        "Request body must be JSON",
+                        state="Failed"
+                    )
+                ), 400
             )
+
+        payload = request.get_json(silent=True)
+
+        # Okay get the data, now conform if it is dict
+        if not isinstance(payload, dict):
+                return None, (
+                    jsonify(
+                        response_builder(
+                            "Request body must be JSON",
+                            state="Failed"
+                        )
+                    ), 400
+                )
+
+        try:
+            data = AuthorValidator.model_validate(payload)
+            return data, None
+
+        except ValidationError as error:
+            errors = error.errors(include_context=False)
+
+            required_fields = {
+                err["loc"][0]
+                for err in errors
+                if err["type"] == "missing" and err["loc"]
+
+            }
+
+            if required_fields:
+                return None, (
+                    jsonify(
+                        response_builder(
+                            "'first_name' and 'second_name' field are required",
+                            state="Failed"
+                        )
+                    ), 400
+                )
+
+            message = "Invalid author data"
+
+            for err in errors:
+                field = err["loc"][0] if err["loc"] else None
+
+                if field == "first_name":
+                    if err["type"] == "string_type":
+                        message = "First name must be a string"
+                    elif err["type"] == "value_error":
+                        message = "First name cannot be empty"
+
+                elif field == "second_name":
+                    if err["type"] == "string_type":
+                        message = "Second name must be a string"
+                    elif err["type"] == "value_error":
+                        message = "Second name cannot be empty"
+
+            return None, (
+                jsonify(
+                    response_builder(
+                        message,
+                        state="Failed"
+                    )
+                ), 400
+            )
+#     try:
+#         data = AuthorValidator.model_validate(request.get_json(silent=True))
+#         return data, None
+#
+#     except ValidationError as error:
+#         details = [ {"fields": err["loc"][0], "message": err["msg"]} for err in error.errors(include_context=False)]
+#
+#         return None, (
+#             jsonify(
+#                 response_builder("The request contains invalid data", state="Failed", details=details)
+#             ), 400
+#             )
 
 def validate_author_exists(author_id):
     author = db.session.get(Author, author_id)
@@ -50,8 +123,7 @@ def validate_author_exists(author_id):
         return None, (
             jsonify(
                 response_builder(
-                    "Author not found",
-                    details="Author ID not found.",
+                    "Author ID not found",
                     state="Failed"
                 )
             ), 404

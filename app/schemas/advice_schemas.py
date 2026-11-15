@@ -16,7 +16,7 @@ class AdviceValidator(BaseModel):
         if not value.strip():
             raise ValueError("Advice cannot be empty")
 
-        return value.lower()
+        return value
 
 class AdviceDelete(BaseModel):
     author_id: int

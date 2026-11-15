@@ -106,7 +106,7 @@ def test_search_no_result(client):
     assert response.status_code == 200
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "No matching author"
+    assert data["error"] == "No matching author"
 
 def test_search_found(client):
     new_author = create_new_author(client)
@@ -129,7 +129,7 @@ def test_search_invalid_url(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Search parameter is required!"
+    assert data["error"] == "Search parameter is required!"
 
 def test_get_empty_author(client):
     response = client.get(author_url)
@@ -138,6 +138,7 @@ def test_get_empty_author(client):
     data = response.get_json()
     assert data["data"] is None
     assert data["message"] == "No available author"
+    assert data["success"] is True
 
 def test_get_authors(client):
     create_new_author(client)
@@ -171,7 +172,8 @@ def test_author_not_found(client):
     assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Author not found. Check author id"
+    assert data["error"] == "Author ID not found"
+    
 
 def test_get_author_advices(client):
     new_author = create_new_author(client)
@@ -214,7 +216,7 @@ def test_no_json(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Request body must be JSON"
+    assert data["error"] == "Request body must be JSON"
 @pytest.mark.parametrize(
     "payload",
     invalid_payload_key
@@ -226,7 +228,7 @@ def test_create_key_validation(client, payload):
 
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == " 'first_name' and 'second_name' field are required"
+    assert data["error"] == "'first_name' and 'second_name' field are required"
 
 @pytest.mark.parametrize(
     "payload, error_message",
@@ -238,7 +240,7 @@ def test_create_value_validation(client, payload, error_message):
     )
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == error_message
+    assert data["error"] == error_message
 
 def test_update_author(client):
     new_author = create_new_author(client)
@@ -268,7 +270,7 @@ def test_update_key_validation(client, payload):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == " 'first_name' and 'second_name' field are required"
+    assert data["error"] == "'first_name' and 'second_name' field are required"
 
 @pytest.mark.parametrize(
     "payload, error_message",
@@ -285,7 +287,7 @@ def test_update_value_validation(client, payload, error_message):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == error_message
+    assert data["error"] == error_message
 
 def test_update_not_found(client):
     response = client.put(
@@ -295,7 +297,8 @@ def test_update_not_found(client):
     assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Author not found. Check author id"
+    assert data["error"] == "Author ID not found"
+    
 
 def test_delete_author(client):
     response = create_new_author(client)
@@ -314,7 +317,8 @@ def test_delete_not_found(client):
     assert response.status_code == 404
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "ERROR!! Author not found. Check author id"
+    assert data["error"] == "Author ID not found"
+    
 
 def test_delete_with_advices(client):
     new_author = create_new_author(client)
@@ -327,4 +331,4 @@ def test_delete_with_advices(client):
     assert response.status_code == 400
     data = response.get_json()
     assert data["success"] is False
-    assert data["message"] == "Cannot delete author because they still have advice."
+    assert data["error"] == "Cannot delete author because they still have advice."

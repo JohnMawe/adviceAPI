@@ -21,24 +21,71 @@ def advice_dict_builder(advice_id, advice, author):
     }
 
 def validate_advice_payload():
+    # Check what data am I receiving, is it json? If not error
+    if not request.is_json:
+        return None, (
+            jsonify(
+                response_builder(
+                    "Request body must be JSON",
+                    state="Failed"
+                )
+            ), 400
+        )
+
+    payload = request.get_json(silent=True)
+
+    # Okay get the data, now conform if it is dict
+    if not isinstance(payload, dict):
+            return None, (
+                jsonify(
+                    response_builder(
+                        "Request body must be JSON",
+                        state="Failed"
+                    )
+                ), 400
+            )
+
     try:
-        data = AdviceValidator.model_validate(request.get_json(silent=True))
+        data = AdviceValidator.model_validate(payload)
         return data, None
+
     except ValidationError as error:
-        details = [
-            {
-                "fields": err["loc"][0],
-                "message": err["msg"]
-            }
-            for err in error.errors(include_context=False)
-        ]
+        errors = error.errors(include_context=False)
+
+        required_fields = {
+            err["loc"][0]
+            for err in errors
+            if err["type"] == "missing" and err["loc"]
+
+        }
+
+        if required_fields:
+            return None, (
+                jsonify(
+                    response_builder(
+                        "'advice' and 'author_id' field are required",
+                        state="Failed"
+                    )
+                ), 400
+            )
+
+        message = "Invalid advice data"
+
+        for err in errors:
+            field = err["loc"][0] if err["loc"] else None
+
+            if field == "advice":
+                if err["type"] == "string_type":
+                    message = "Advice must be a string"
+                elif err["type"] == "value_error":
+                    message = "Advice cannot be empty"
+
 
         return None, (
             jsonify(
                 response_builder(
-                    "The request contains invalid data",
-                    state="Failed",
-                    details=details
+                    message,
+                    state="Failed"
                 )
             ), 400
         )
@@ -49,8 +96,7 @@ def validate_advice_exists(advice_id):
         return None, (
             jsonify(
                 response_builder(
-                    "Advice not found",
-                    details="Advice ID not found",
+                    "Advice ID not found",
                     state="Failed"
                 )
             ), 404
@@ -64,8 +110,7 @@ def validate_author_exists(author_id):
         return None, (
             jsonify(
                 response_builder(
-                    "Author not found",
-                    details="Author ID not found.",
+                    "Author ID not found",
                     state="Failed"
                 )
             ), 404
@@ -297,13 +342,33 @@ def update_advice(advice_id):
 @advice_bp.route("/advice/<int:advice_id>", methods=["DELETE"])
 def delete_advice(advice_id):
     advice, exist_error = validate_advice_exists(advice_id)
+
     if exist_error:
         return exist_error
+
+    if not request.is_json:
+        return jsonify (
+            response_builder(
+                "Request body must be JSON",
+                state="Failed"
+            )
+        ), 400
+
     try:
         payload = AdviceDelete.model_validate(request.get_json(silent=True))
 
+    except ValidationError as error:
+        return jsonify(
+            response_builder(
+                "'author_id' field is required",
+                state="Failed"
+            )
+        ), 400
+
+
         # These restrictions unknown author from deleting advices
         author, exist_error = validate_author_exists(payload.author_id)
+
         if exist_error:
             return exist_error
 
@@ -316,6 +381,3 @@ def delete_advice(advice_id):
                 state="Success"
             )
         ), 200
-
-    except ValidationError as error:
-        return jsonify(response_builder(error.errors(include_context=False), state="Failed")), 400
