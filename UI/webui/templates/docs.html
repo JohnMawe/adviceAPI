@@ -17,7 +17,7 @@
 <section class="docs">
 
     <!-- =======================================================
-    Documention Indexes
+    Documentation Indexes
     ========================================================= -->
     <aside class="docs-index">
         <a href="#overview"><h3>Overview</h3></a>
@@ -25,14 +25,14 @@
         <a href="#authenti"><h3>Authentication</h3></a>
         <a href="#base-url"><h3>Base URL</h3></a>
         <a href="#endpoint"><h3>Endpoint</h3></a>
-        <a href="#requ-respo"><h3>Request & Response</h3></a>
+        <a href="#requ-respo"><h3>Request &amp; Response</h3></a>
         <a href="#error"><h3>Error</h3></a>
         <a href="#rate-limit"><h3>Rate Limit</h3></a>
         <a href="#example"><h3>Example</h3></a>
     </aside>
 
     <!-- ====================================================
-    Documention content
+    Documentation content
     ====================================================== -->
     <section class="docs-description">
         <div class="docs-heading">
@@ -266,13 +266,13 @@ console.log(data);
             <div class="code-block">
             <pre><code>
 {
-    "error": "Authentication required",
-    "message": "API key is missing."
+    "error": "Authentication required. API key is missing.",
+    "success": false
 }
             </code></pre>
             </div>
 
-            <h2>Invaild API key</h2>
+            <h2>Invalid API key</h2>
             <div class="code-block">
             <pre><code>
 401 Unauthorized
@@ -282,8 +282,8 @@ console.log(data);
             <div class="code-block">
             <pre><code>
 {
-    "error": "Invalid API key",
-    "message": "The provided API key is invalid."
+    "error": "The provided API key is invalid.",
+    "success": false
 }
             </code></pre>
             </div>
@@ -305,8 +305,8 @@ HTTP/1.1 401 Unauthorized
             <div class="code-block">
             <pre><code>
 {
-    "error": "Invalid API key",
-    "message": "The provided API key is invalid."
+    "error": "The provided API key is invalid.",
+    "success": flase
 }
             </code></pre>
             </div>
@@ -352,7 +352,7 @@ API_KEY = os.getenv("MOTIVESYNK_API_KEY")
 
             <div class="code-block">
             <pre><code>
-                MOTIVESYNK_API_KEY=msk_live_xxxxxxxxxxxxxxxxx
+MOTIVESYNK_API_KEY=msk_live_xxxxxxxxxxxxxxxxx
             </code></pre>
             </div>
         </div>
@@ -572,7 +572,7 @@ GET /motivations?mood=focused
             </div>
 
             <p>You can replace focused with another <a href="#moods">supported mood.</a></p>
-            <h3 id="moods">Suported mood may includes:</h3>
+            <h3 id="moods">Supported mood may include:</h3>
             <ul>
                 <li>Focused</li>
                 <li>Procrastinating</li>
@@ -666,7 +666,7 @@ Authorization: Bearer YOUR_API_KEY
                 <span class="endpoint-bold">GET /motivations?mood={mood}&media_type={type} </span>
                 - Combine multiple filters.<br>
                 <span class="endpoint-bold">
-                    GET /motivations?page={page-number}&limit={limit-per-page} 
+                    GET /motivations?page={page-number}&limit={limit-per-page}
                 </span>
                 - Controls pagination.
             </p>
@@ -827,8 +827,8 @@ GET /api/v1/motivations/ms_98432
             <div class="code-block">
                 <pre><code>
 {
-    "error": "Invalid API key",
-    "message": "The provided API key is invalid."
+    "error": "The provided API key is invalid.",
+    "success": false
 }
                 </code></pre>
             </div>
@@ -895,19 +895,19 @@ Clients should use the response HTTP status code to determine whether the reques
 
             <h2>Error Response Structure</h2>
             <p>
-                A typical error response contains an error field and a message field
+                A typical error response contains an error field and a success field
             </p>
             <div class="code-block">
                 <pre><code>
 {
-    "error": "Invalid API key",
-    "message": "The provided API key is invalid."
+    "error": "Request must be JSON",
+    "success": false
 }
                 </code></pre>
             </div>
 
             <p>
-                The error field identifies the type of error, while the message field provides additional information about what went wrong.
+                The error field identifies the type of error, while the success provide booline status (true or false) of the response.
             </p>
 
             <h2>HTTP Error Status Codes</h2>
@@ -921,8 +921,8 @@ Clients should use the response HTTP status code to determine whether the reques
 HTTP/1.1 400 Bad Request
 
 {
-    "error": "Invalid request",
-    "message": "The request contains invalid data."
+    "error": "Request must be JSON",
+    "success": false
 }
                 </code></pre>
             </div>
@@ -945,8 +945,8 @@ HTTP/1.1 400 Bad Request
 HTTP/1.1 401 Unauthorized
 
 {
-    "error": "Authentication required",
-    "message": "API key is missing."
+    "error": "Authentication required. API key is missing.",
+    "success": false
 }
                 </code></pre>
             </div>
@@ -955,8 +955,8 @@ HTTP/1.1 401 Unauthorized
             <div class="code-block">
                 <pre><code>
 {
-    "error": "Invalid API key",
-    "message": "The provided API key is invalid."
+    "error": "The provided API key is invalid.",
+    "success": false
 }
                 </code></pre>
             </div>
@@ -971,8 +971,8 @@ HTTP/1.1 401 Unauthorized
 HTTP/1.1 404 Not Found
 
 {
-    "error": "Not found",
-    "message": "The requested motivation was not found."
+    "error": "Advice ID not found",
+    "success": false
 }
                 </code></pre>
             </div>
@@ -990,8 +990,8 @@ HTTP/1.1 404 Not Found
 HTTP/1.1 429 Too Many Requests
 
 {
-    "error": "Rate limit exceeded",
-    "message": "Too many requests. Please try again later."
+    "error": "Too many requests. Please try again later.",
+    "success": false
 }
                 </code></pre>
             </div>
@@ -1010,7 +1010,7 @@ HTTP/1.1 500 Internal Server Error
 
 {
     "error": "Internal server error",
-    "message": "An unexpected error occurred. Please try again later."
+    "success": false
 }
                 </code></pre>
             </div>
@@ -1025,12 +1025,12 @@ HTTP/1.1 500 Internal Server Error
             </p>
             <h4>For example:</h4>
             <p>
-                200 -> Process the response<br>
-                400 -> Check the request data<br>
-                401 -> Check the API key<br>
-                404 -> Check the requested resource<br>
-                429 -> Wait before sending another request<br>
-                500 -> Try again later
+                200 &rarr; Process the response<br>
+                400 &rarr; Check the request data<br>
+                401 &rarr; Check the API key<br>
+                404 &rarr; Check the requested resource<br>
+                429 &rarr; Wait before sending another request<br>
+                500 &rarr; Try again later
             </p>
 
             <h2>Best Practices</h2>
@@ -1078,8 +1078,8 @@ HTTP/1.1 429 Too Many Requests
             <div class="code-block">
                 <pre><code>
 {
-    "error": "Rate limit exceeded",
-    "message": "Too many requests. Please try again later."
+    "error": "Too many requests. Please try again later.",
+    "success": fasle
 }
                 </code></pre>
             </div>
@@ -1145,7 +1145,7 @@ curl -X GET "https://api.motivesynk.com/api/v1/motivations" \ -H "Authorization:
             </div>
 
             <h2>Python</h2>
-            <p>Using Python and the requests library:</p>
+            <p>Using Python and the requests' library:</p>
             <div class="code-block">
                 <pre><code>
 import requests
@@ -1262,8 +1262,8 @@ curl -X GET \
             <div class="code-block">
                 <pre><code>
 {
-    "error": "Invalid API key",
-    "message": "The provided API key is invalid."
+    "error": "The provided API key is invalid.",
+    "success": false
 }
                 </code></pre>
             </div>

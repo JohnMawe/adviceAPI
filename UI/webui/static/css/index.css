@@ -72,7 +72,7 @@
     margin: 0 auto;
 }
 
-.visual-artical {
+.visual-article {
     display: flex;
     flex-direction: column;
 
@@ -90,7 +90,7 @@
             box-shadow 0.2s ease;
 }
 
-.visual-artical:hover {
+.visual-article:hover {
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
 }

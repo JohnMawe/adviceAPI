@@ -93,7 +93,7 @@
     .docs-index {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: var(--spacing-10);
+        gap: var(--spacing-md);
         width: 100%;
         padding: var(--spacing-lg) 100px;
         height: auto;
