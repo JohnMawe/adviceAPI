@@ -3,6 +3,9 @@
     <words>
       <w>endblock</w>
       <w>explorehub</w>
+      <w>fromisoformat</w>
+      <w>ilike</w>
+      <w>isinstance</w>
     </words>
   </dictionary>
 </component>

@@ -366,18 +366,18 @@ def delete_advice(advice_id):
         ), 400
 
 
-        # These restrictions unknown author from deleting advices
-        author, exist_error = validate_author_exists(payload.author_id)
+    # These restrictions unknown author from deleting advices
+    author, exist_error = validate_author_exists(payload.author_id)
 
-        if exist_error:
-            return exist_error
+    if exist_error:
+        return exist_error
 
-        db.session.delete(advice)
-        db.session.commit()
+    db.session.delete(advice)
+    db.session.commit()
 
-        return jsonify(
-            response_builder(
-                "Advice deleted successfully",
-                state="Success"
-            )
-        ), 200
+    return jsonify(
+        response_builder(
+            "Advice deleted successfully",
+             state="Success"
+        )
+    ), 200

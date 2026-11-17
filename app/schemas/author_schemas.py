@@ -12,7 +12,7 @@ class AuthorValidator(BaseModel):
 
     @field_validator('first_name')
     @classmethod
-    def validate_author(cls, value: str):
+    def validate_first_name(cls, value: str):
         if not value.strip():
             raise ValueError("First name cannot be empty")
 
@@ -20,7 +20,7 @@ class AuthorValidator(BaseModel):
 
     @field_validator('second_name')
     @classmethod
-    def validate_author(cls, value: str):
+    def validate_second_name(cls, value: str):
         if not value.strip():
             raise ValueError("Second name cannot be empty")
 

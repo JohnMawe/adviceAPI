@@ -9,6 +9,7 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 pytest = "*"
 pydantic = "*"
+pytest-cov = "*"
 
 [dev-packages]
 pytest-cov = "*"
